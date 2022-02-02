@@ -55,8 +55,6 @@ jobs:
           - checkout
           # CircleCI に登録した秘密鍵を呼び出す
           - add_ssh_keys:
-            fingerprints:
-              -"RklrLITvTQByCSyPqiXXPtpTgPYejJNpVZrt7krdTtA"
           # CircleCI に登録した環境変数を使って SSH
           - run: ssh ${USER_NAME}@${HOST_NAME} 'cd https://github.com/SenruoYusei/programming/upload/main/WebApplication/shiftCollection && git pull'
       
