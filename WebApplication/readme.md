@@ -1,6 +1,6 @@
 # Webアプリケーションについて
 
-作成した Web アプリケーションのURL(更新版) : [http://18.217.62.118:8080/shiftCollection/WelcomeServlet](http://18.217.62.118:8080/shiftCollection/WelcomeServlet)
+作成した Web アプリケーションのURL(更新版) : [http://3.143.241.163:8080/shiftCollection/WelcomeServlet](http://3.143.241.163:8080/shiftCollection/WelcomeServlet)
 
 作成した環境
 OS : macOS  
