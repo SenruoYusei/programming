@@ -12,7 +12,7 @@ import model.Member;
 import model.MemberSet;
 import model.User;
 
-
+//登録，修正，削除が完了後にDBに接続したい
 public class MemberDAO {
 	private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
