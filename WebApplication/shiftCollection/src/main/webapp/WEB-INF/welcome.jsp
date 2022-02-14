@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<h1><font color="red">稼働日は3,4,5(当月後半シフト提出日),18,19,20(来月前半シフト提出日)日のみとします．</font></h1>
+		<h1><font color = "red">稼働日は3,4,5(当月後半シフト提出日),18,19,20(来月前半シフト提出日)日のみとします．</font></h1>
 	</div>
 </body>
 </html>
