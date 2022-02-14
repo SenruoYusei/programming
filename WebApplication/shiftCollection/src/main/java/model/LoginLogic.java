@@ -12,10 +12,19 @@ public class LoginLogic {//ユーザー登録の際に登録情報を持ちた�
 	public MemberSet getMemberList(){
 		return members;
 	}
+	/*
 	public Member getLoginAccount (User u) {
 		if(manager.isMatched(u))return manager;
 		for(Member m : members) {
 			if(m.isMatched(u))return m;
+		}
+		return null;
+	}
+	*/
+	public Member getLoginAccount (String userName, String userPass) {
+		if(manager.isMatched(userName, userPass))return manager;
+		for(Member m : members) {
+			if(m.isMatched(userName, userPass))return m;
 		}
 		return null;
 	}

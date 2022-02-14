@@ -83,8 +83,13 @@ public class Member {
 		//return dayNum;
 	}
 	*/
+	/*
 	public boolean isMatched(User u) {
 		return name.equals(u.getName()) && pass.equals(u.getPass());
+	}
+	*/
+	public boolean isMatched(String userName, String userPass) {
+		return name.equals(userName) && pass.equals(userPass);
 	}
 	public void setTermInfo(int m, int t) {
 		month = m;

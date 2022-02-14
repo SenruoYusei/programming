@@ -49,8 +49,11 @@ public class WelcomeServlet extends HttpServlet {
 				members = llogic.getMemberList();
 				application.setAttribute("members", members);
 			}
+			/*
 			User u = new User(userName, pass);
 			Member m = llogic.getLoginAccount(u);
+			*/
+			Member m = llogic.getLoginAccount(userName, userPass);
 			
 			if(m == null) {
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
