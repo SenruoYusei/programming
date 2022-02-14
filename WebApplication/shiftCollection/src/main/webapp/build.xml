@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<project basedir="." default="all" name="sample">
+  <property name="javac.debug" value="true"/>
+  <property name="javac.debuglevel" value="source,lines,vars"/>
+  <property name="javac.target" value="1.6"/>
+  <property name="javac.source" value="1.6"/>
+  <property name="javac.encoding" value="utf-8"/>
+
+  <property name="src.java.dir" value="src"/>
+  <property name="src.prop.dir" value="prop"/>
+  <property name="src.web.dir" value="WebContent"/>
+  <property name="dest.dir" value="dest"/>
+  <property name="dest.java.dir" value="${dest.dir}/classes"/>
+  <property name="war.file" value="${dest.dir}/${ant.project.name}.war"/>
+  <path id="base.classpath">
+    <fileset dir="lib"/>
+    <fileset dir="${src.web.dir}/WEB-INF/lib"/>
+  </path>
+
+  <target name="all" depends="clean,build-war" />
+
+  <target name="build-war" description="warファイル生成" depends="compile">
+    <war destfile="${war.file}" webxml="${src.web.dir}/WEB-INF/web.xml">
+      <fileset dir="${src.web.dir}">
+        <include name="**/*"/>
+      </fileset>
+      <classes dir="${dest.java.dir}"/>
+    </war>
+  </target>
+
+  <target name="compile" description="Javaコンパイル" depends="init">
+    <javac destdir="${dest.java.dir}"
+      encoding="${javac.encoding}" includeAntRuntime="off"
+      debug="${javac.debug}" debuglevel="${javac.debuglevel}"
+      source="${javac.source}" target="${javac.target}">
+
+      <src path="${src.java.dir}"/>
+      <classpath refid="base.classpath"/>
+    </javac>
+  </target>
+
+  <target name="init">
+    <mkdir dir="${dest.java.dir}"/>
+    <copy todir="${dest.java.dir}" includeemptydirs="false">
+      <fileset dir="${src.java.dir}">
+        <exclude name="**/*.java"/>
+      </fileset>
+      <fileset dir="${src.prop.dir}"/>
+    </copy>
+  </target>
+
+  <target name="clean" description="前回の生成ファイルを削除">
+    <delete dir="${dest.dir}"/>
+  </target>
+</project>
