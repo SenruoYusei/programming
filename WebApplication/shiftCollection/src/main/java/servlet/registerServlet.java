@@ -60,7 +60,7 @@ public class registerServlet extends HttpServlet {
 			session.setAttribute("endMinute", eM);
 			Member m = (Member) session.getAttribute("member");
 			m.setSchedule(dayPos, s);
-			MemberDAO dao = new MemberDAO();
+			//MemberDAO dao = new MemberDAO();
 			dao.insertSchedule(m, dayPos, s);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
