@@ -43,6 +43,7 @@
 		<c:if test = "${not empty errorMsg }">
 			<p>${errorMsg }</p>
 		</c:if>
+		<p>month = <c:out value = "${month}"/></p>
 		<c:if test = "${not empty month}">
 			<p>
 				${month  + 1}月
