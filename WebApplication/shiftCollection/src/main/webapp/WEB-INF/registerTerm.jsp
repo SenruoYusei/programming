@@ -43,11 +43,11 @@
 		<c:if test = "${not empty errorMsg }">
 			<p>${errorMsg }</p>
 		</c:if>
-		<c:if test = "${member.month != null}">
+		<c:if test = "${not empty month}">
 			<p>
-				${member.month  + 1}月
+				${month  + 1}月
 				<c:choose>
-					<c:when test="${member.termNum == 0 }">前半</c:when>
+					<c:when test="${term == 0 }">前半</c:when>
 					<c:otherwise>後半</c:otherwise>
 				</c:choose>
 				でよろしいですか？
