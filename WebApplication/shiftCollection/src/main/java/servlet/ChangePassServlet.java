@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -43,20 +42,18 @@ public class ChangePassServlet extends HttpServlet {
 		//正しくない場合，再度入力させる
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
-		if(m != null) {
-			MemberDAO dao = new MemberDAO();
-			dao.updatePass(m, newPass);
-			m.setNewPass(newPass);
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
-			d.forward(request, response);
+		if(!currentPass.equals(m.getPass())) {
+			request.setAttribute("matchError", "現在のパスワードが正しくありません");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/inputNewPass.jsp");
+			d.forward(request, response);//redirect?
 		}else if(currentPass.equals(newPass)){
 			request.setAttribute("matchError", "現在のパスワードと変更がありません");
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/inputNewPass.jsp");
 			d.forward(request, response);//redirect?
 		}else {
-			request.setAttribute("matchError", "現在のパスワードが正しくありません");
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/inputNewPass.jsp");
-			d.forward(request, response);//redirect?
+			m.setNewPass(newPass);
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
+			d.forward(request, response);
 		}
 	}
 

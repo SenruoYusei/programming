@@ -160,4 +160,29 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	public void updateAll(Member m) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "UPDATE MEMBERS SET PASS = ? "
+					+ "MNUM = ? "
+					+ "TERM = ? ";
+			for(int i = 0;i <= 15;i++) {
+				sql += "DAY" + i + " = ? ";
+			}//データベースには15日分設置？
+			sql += " FROM MEMBERS WHERE ID = ? AND NAME = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//DB への変更内容を入力
+			pStmt.setString(1, m.getPass());
+			pStmt.setInt(2, m.getMonth());
+			pStmt.setInt(3, m.getTermNum());
+			for(int i = 0;i <= 15;i++) {
+				pStmt.setString(3 + i,m.getSchedule(i));
+			}
+			pStmt.setInt(19, m.getId());
+			pStmt.setString(20, m.getName());
+			//DB を更新
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

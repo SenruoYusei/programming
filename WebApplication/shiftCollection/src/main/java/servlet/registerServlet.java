@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -60,8 +59,6 @@ public class registerServlet extends HttpServlet {
 			session.setAttribute("endMinute", eM);
 			Member m = (Member) session.getAttribute("member");
 			m.setSchedule(dayPos, s);
-			//MemberDAO dao = new MemberDAO();
-			dao.insertSchedule(m, dayPos, s);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
 		}else if(dayPos == -1) {

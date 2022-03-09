@@ -4,8 +4,9 @@ import dao.MemberDAO;
 public class LoginLogic {//ユーザー登録の際に登録情報を持ちたい
 	private MemberSet members;
 	private Member manager;
+	private MemberDAO dao;
 	public LoginLogic() {
-		MemberDAO dao = new MemberDAO();
+		dao = new MemberDAO();
 		members = dao.findAll();
 		manager = new Member(99,"***","7777",0,0);
 	}
@@ -27,6 +28,9 @@ public class LoginLogic {//ユーザー登録の際に登録情報を持ちた�
 			if(m.isMatched(userName, userPass))return m;
 		}
 		return null;
+	}
+	public void updateAll(Member m) {
+		dao.updateAll(m);
 	}
 	/*
 	public boolean canBeLogined (User u) {//ログイン可能かを判断　Memberの　ArrayList　に u が含まれるか

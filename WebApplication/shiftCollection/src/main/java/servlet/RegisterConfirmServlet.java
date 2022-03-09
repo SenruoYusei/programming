@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -48,10 +47,8 @@ public class RegisterConfirmServlet extends HttpServlet {
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}else if(action.equals("delete")) {
-			m.resetSchedule(deletePos);
+			m.deleteSchedule(deletePos);
 			session.setAttribute("member", m);
-			MemberDAO dao = new MemberDAO();
-			dao.resetDaySchedule(m, deletePos);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/confirm.jsp");
 			d.forward(request, response);
 		}

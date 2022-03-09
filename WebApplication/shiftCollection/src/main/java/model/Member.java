@@ -11,18 +11,20 @@ public class Member {
 	private int dayNum;
 	private int month;
 	private int dayOfWeek;
-	public Member(int i, String na, String pa, int m, int t) {
+	private boolean isUpdated;
+	public Member(int i, String na, String pa, int m, int t) {//
 		id = i;
 		name = na;
 		pass = pa;
 		setTermInfo(m,t);
 	}
-	public Member(int i, String na, String pa, int m, int t, String[] time) {
+	public Member(int i, String na, String pa, int m, int t, String[] time) {//DB の読み取り
 		id = i;
 		name = na;
 		pass = pa;
 		setTermInfo(m,t);
 		s = time;
+		isUpdated = false;
 		//sche = new Schedule(dayNum);
 	}
 	public int getId() {
@@ -54,12 +56,14 @@ public class Member {
 	}
 	
 	public void setNewPass(String newPass) {
+		if(!isUpdated)isUpdated = true;
 		pass = newPass;
 	}
 	public boolean termChanged(int m, int t) {
 		return getMonth() != m || getTermNum() != 15 * t;
 	}
 	public void initializeSchedule(int m, int t) {
+		if(!isUpdated)isUpdated = true;
 		setTermInfo(m, t);
 		s = new String[dayNum];
 	}
@@ -68,14 +72,22 @@ public class Member {
 		s = time;
 	}
 	public void setSchedule(int dayPos, String time) {
+		if(!isUpdated)isUpdated = true;
 		s[dayPos] = time;
 	}
-	public void resetSchedule(int dayPos) {
+	public void deleteSchedule(int dayPos) {
+		if(!isUpdated)isUpdated = true;
 		s[dayPos] = "";
 	}
 	public String getDay(int index) {
 		String[] weekName = {"(日)","(月)","(火)","(水)","(木)","(金)","(土)"};
 		return (termNum + index + 1) + weekName[(dayOfWeek + termNum + index) % 7];
+	}
+	public void updateCompleted() {
+		isUpdated = false;
+	}
+	public boolean isUpdated() {
+		return isUpdated;
 	}
 	/*
 	public int getDayNum() {

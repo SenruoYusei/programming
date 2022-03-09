@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -48,14 +47,7 @@ public class termServlet extends HttpServlet {
 		if(isFeasible(month, term)) {
 			HttpSession session = request.getSession();
 			Member m = (Member) session.getAttribute("member");
-			session.setAttribute("month", month);
-			session.setAttribute("term", term);
-			MemberDAO dao = new MemberDAO();
-			dao.setTerm(m, month, term);
-			if(m.termChanged(month, term)) {
-				m.initializeSchedule(month, term);
-				dao.initializeSchedule(m);
-			}
+			if(m.termChanged(month, term))m.initializeSchedule(month, term);
 			session.setAttribute("member", m);
 			//setTerm を m.getDayNum の中に
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerTerm.jsp");

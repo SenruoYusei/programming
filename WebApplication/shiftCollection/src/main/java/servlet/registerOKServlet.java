@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.LoginLogic;
+import model.Member;
 /**
  * Servlet implementation class registerOKServlet
  */
@@ -23,8 +25,10 @@ public class registerOKServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		//session.removeAttribute("month");
-		//session.removeAttribute("term");
+		Member m = (Member) session.getAttribute("member");
+		LoginLogic llogic = new LoginLogic();
+		llogic.updateAll(m);
+		m.updateCompleted();
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerOK.jsp");
 		d.forward(request, response);
 	}
