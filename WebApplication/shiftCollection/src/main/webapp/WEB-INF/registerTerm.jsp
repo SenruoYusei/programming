@@ -45,9 +45,9 @@
 		</c:if>
 		<c:if test = "${not empty month }">
 			<p>
-				${month  + 1}月
+				${member.month  + 1}月
 				<c:choose>
-					<c:when test="${term == 0 }">前半</c:when>
+					<c:when test="${member.termNum == 0 }">前半</c:when>
 					<c:otherwise>後半</c:otherwise>
 				</c:choose>
 				でよろしいですか？
