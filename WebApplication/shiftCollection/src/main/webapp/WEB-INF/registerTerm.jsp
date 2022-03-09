@@ -43,7 +43,7 @@
 		<c:if test = "${not empty errorMsg }">
 			<p>${errorMsg }</p>
 		</c:if>
-		<c:if test = "${not empty month }">
+		<c:if test = "${not empty member.month }">
 			<p>
 				${member.month  + 1}月
 				<c:choose>
