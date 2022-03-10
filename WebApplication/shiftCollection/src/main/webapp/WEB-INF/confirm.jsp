@@ -27,7 +27,7 @@
 				<c:if test = "${member.getDay(index) !=  ''}">
 					<input type = "hidden" name = "pos" value = "${index }">
 					<button name = "action" value = "modify" onclick = "location.href='/shiftCollection/Modify.servlet'">修正</button>
-					<button name = "action" value = "delete">削除</button>
+					<button name = "action" value = "delete" onclick = "location.href='/shiftCollection/Delete.servlet'">削除</button>
 					<br>
 				</c:if>
 			</c:forEach>

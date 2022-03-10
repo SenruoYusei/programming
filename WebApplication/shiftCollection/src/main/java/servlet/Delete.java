@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import model.Member;
 
 /**
- * Servlet implementation class RegisterConfirmServlet
+ * Servlet implementation class Delete
  */
-@WebServlet("/RegisterConfirmServlet")
-public class RegisterConfirmServlet extends HttpServlet {
+@WebServlet("/Delete")
+public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,7 +30,7 @@ public class RegisterConfirmServlet extends HttpServlet {
 			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
 			response.sendRedirect("/shiftCollection/welcome.jsp");
 		}else {
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/confirm.jsp");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/delete.jsp");
 			d.forward(request, response);
 		}
 	}
@@ -40,16 +40,18 @@ public class RegisterConfirmServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		String action = request.getParameter("action");
-		int deletePos = Integer.parseInt(request.getParameter("pos"));
-		if(action.equals("modify")) {
-			session.setAttribute("modifyPos", deletePos);
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
+		Member m = (Member)session.getAttribute("member");
+		int dayPos = Integer.parseInt(request.getParameter("deletePos"));
+		String flag = request.getParameter("flag");
+		if(flag.equals("1")) {
+			m.deleteSchedule(dayPos);
+			session.setAttribute("member", m);
+			RequestDispatcher d = request.getRequestDispatcher("WEB-INF/confirm.jsp");
 			d.forward(request, response);
-		}else if(action.equals("delete")) {
-			session.setAttribute("deletePos", deletePos);
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/confirm.jsp");
+		}else {
+			RequestDispatcher d = request.getRequestDispatcher("WEB-INF/confirm.jsp");
 			d.forward(request, response);
 		}
 	}
