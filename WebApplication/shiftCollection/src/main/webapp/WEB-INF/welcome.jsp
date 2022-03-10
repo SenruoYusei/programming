@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>修正入力</p>
+		<p>修正入力エンコード</p>
 	</div>
 </body>
 </html>

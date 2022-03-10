@@ -38,6 +38,7 @@ public class Modify extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		Member m = (Member)session.getAttribute("member");
 		int dayPos = Integer.parseInt(request.getParameter("ModifyPos"));
