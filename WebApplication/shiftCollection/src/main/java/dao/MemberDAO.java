@@ -168,17 +168,16 @@ public class MemberDAO {
 			for(int i = 0;i <= 15;i++) {
 				sql += "DAY" + i + " = ? ";
 			}//データベースには15日分設置？
-			sql += " FROM MEMBERS WHERE ID = ? AND NAME = ?";
+			sql += "FROM MEMBERS WHERE ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
 			pStmt.setInt(2, m.getMonth());
 			pStmt.setInt(3, m.getTermNum());
 			for(int i = 0;i <= 15;i++) {
-				pStmt.setString(3 + i,m.getSchedule(i));
+				pStmt.setString(4 + i,m.getSchedule(i));
 			}
-			pStmt.setInt(19, m.getId());
-			pStmt.setString(20, m.getName());
+			pStmt.setInt(20, m.getId());
 			//DB を更新
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
