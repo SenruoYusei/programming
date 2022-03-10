@@ -7,7 +7,7 @@ public class Member {
 	private String name;
 	private String pass;
 	String[] s;//希望時間,メモ
-	private int termNum;
+	private int term;
 	private int dayNum;
 	private int month;
 	private int dayOfWeek;
@@ -49,7 +49,7 @@ public class Member {
 		return s;
 	}
 	public int getTermNum() {
-		return termNum;
+		return term;
 	}
 	public int getMonth() {
 		return month;
@@ -81,7 +81,7 @@ public class Member {
 	}
 	public String getDay(int index) {
 		String[] weekName = {"(日)","(月)","(火)","(水)","(木)","(金)","(土)"};
-		return (termNum + index + 1) + weekName[(dayOfWeek + termNum + index) % 7];
+		return (term + index + 1) + weekName[(dayOfWeek + term + index) % 7];
 	}
 	public void updateCompleted() {
 		isUpdated = false;
@@ -111,11 +111,11 @@ public class Member {
 		calendar.set(year,month,1);
 		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		if(t == 0) {//前半
-			termNum = 0;
+			term = 0;
 			dayNum = 15;
 			return;
 		}
-		termNum = 15;
+		term = 15;
 		if(m == 1) {
 			if(year % 4 == 0) {
 				dayNum =  14;
