@@ -166,17 +166,17 @@ public class MemberDAO {
 					+ "MNUM = ?, "
 					+ "TERM = ?, ";
 			int dayNum = m.getDayNum();
-			for(int i = 0;i < dayNum;i++) {
+			for(int i = 0;i < dayNum - 1;i++) {
 				sql += "DAY" + i + " = ?, ";
 			}
-			sql += "DAY"+dayNum+" = ? ";
+			sql += "DAY"+(dayNum - 1)+" = ? ";
 			sql += "WHERE ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
 			pStmt.setInt(2, m.getMonth());
 			pStmt.setInt(3, m.getTermNum());
-			for(int i = 0;i <= dayNum;i++) {
+			for(int i = 0;i < dayNum;i++) {
 				pStmt.setString(4 + i,m.getSchedule(i));
 			}
 			pStmt.setInt(20, m.getId());
