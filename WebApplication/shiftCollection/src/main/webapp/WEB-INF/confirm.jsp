@@ -19,11 +19,12 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
-		<form action = "/shiftCollection/RegisterConfirmServlet" method = "post">
+		
 			<c:forEach begin="0" end="${member.dayNum - 1}" step="1" varStatus="status">
 				<c:set var = "index" value = "${ status.index}"/>
 				<c:set var = "info" value = "${member.getSchedule(index) }"/>
 				<p>${member.getDay(index)} : ${info }</p>
+				<form action = "/shiftCollection/RegisterConfirmServlet" method = "post">
 				<c:if test = "${member.getSchedule(index) != ''}">
 					<input type = "hidden" name = "pos" value = "${index }">
 					${index }
@@ -31,8 +32,9 @@
 					<button name = "action" value = "delete">削除</button>
 					<br>
 				</c:if>
+				</form>
 			</c:forEach>
-		</form>
+		
 		<a href = "/shiftCollection/registerServlet">登録画面に戻る</a>
 		<a href = "/shiftCollection/registerOKServlet">提出する</a>
 	</div>
