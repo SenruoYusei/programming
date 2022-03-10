@@ -52,6 +52,7 @@ public class ChangePassServlet extends HttpServlet {
 			d.forward(request, response);//redirect?
 		}else {
 			m.setNewPass(newPass);
+			session.setAttribute("member", m);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
 			d.forward(request, response);
 		}
