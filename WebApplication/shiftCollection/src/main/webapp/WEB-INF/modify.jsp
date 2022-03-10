@@ -11,7 +11,6 @@
 </head>
 <body>
 	<div>
-		<c:set var = "index" value = "${deletePos  + 1}"/>
 		<h1>シフト修正画面</h1>
 		<p><c:out value = "${member.name }"/>さんログイン中</p>
 		<a href = "/shiftCollection/Logout">ログアウト</a>
@@ -20,6 +19,7 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
+		<c:set var = "index" value = "${deletePos  + 1}"/>
 		変更前<br>
 		<p>${member.getDay(index)} : ${member.getSchedule(index)}</p>
 		
