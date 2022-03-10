@@ -37,10 +37,10 @@ public class termServlet extends HttpServlet {
 			llogic.updateAll(m);
 			m.updateCompleted();
 		}
-		else {
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerTerm.jsp");
-			d.forward(request, response);
-		}
+		
+		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerTerm.jsp");
+		d.forward(request, response);
+		
 	}
 
 	/**
