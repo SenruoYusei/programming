@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div>
-		<c:set var = "index" value = "${deletePos }"/>
+		<c:set var = "index" value = "${deletePos  + 1}"/>
 		<h1>シフト修正画面</h1>
 		<p><c:out value = "${member.name }"/>さんログイン中</p>
 		<a href = "/shiftCollection/Logout">ログアウト</a>
@@ -26,6 +26,7 @@
 		修正後<br>
 		<form action = "/shiftCollection/Modify" method = "post">
 			${member.getDay(index)}
+			<input type = "hidden" name = "ModifyPos" value = "${index}">
 			<select name = "beginHour">
 				<option ${beginHour == 8 ? "selected" : ""} value = "8">8
 				<option ${beginHour == 9 ? "selected" : ""} value = "9">9
