@@ -165,17 +165,18 @@ public class MemberDAO {
 			String sql = "UPDATE MEMBERS SET PASS = ?, "
 					+ "MNUM = ?, "
 					+ "TERM = ?, ";
-			for(int i = 0;i < 15;i++) {
+			int dayNum = m.getDayNum();
+			for(int i = 0;i < dayNum;i++) {
 				sql += "DAY" + i + " = ?, ";
 			}
-			sql += "DAY15  = ? ";
+			sql += "DAY"+dayNum+" = ? ";
 			sql += "WHERE ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
 			pStmt.setInt(2, m.getMonth());
 			pStmt.setInt(3, m.getTermNum());
-			for(int i = 0;i <= 15;i++) {
+			for(int i = 0;i <= dayNum;i++) {
 				pStmt.setString(4 + i,m.getSchedule(i));
 			}
 			pStmt.setInt(20, m.getId());
