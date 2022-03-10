@@ -162,12 +162,13 @@ public class MemberDAO {
 	}
 	public void updateAll(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "UPDATE MEMBERS SET PASS = ? "
-					+ "MNUM = ? "
-					+ "TERM = ? ";
-			for(int i = 0;i <= 15;i++) {
-				sql += "DAY" + i + " = ? ";
-			}//データベースには15日分設置？
+			String sql = "UPDATE MEMBERS SET PASS = ?, "
+					+ "MNUM = ?, "
+					+ "TERM = ?, ";
+			for(int i = 0;i < 15;i++) {
+				sql += "DAY" + i + " = ?, ";
+			}
+			sql += "DAY15  = ? ";
 			sql += "FROM MEMBERS WHERE ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
