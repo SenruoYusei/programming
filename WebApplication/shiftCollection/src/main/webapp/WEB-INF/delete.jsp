@@ -19,6 +19,7 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
+		${deletePos}
 		<c:set var = "index" value = "${deletePos }"/>
 		
 		<p>${member.getDay(index) } : ${member.getSchedule(index) }</p>
