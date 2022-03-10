@@ -26,6 +26,7 @@
 				<p>${member.getDay(index)} : ${info }</p>
 				<c:if test = "${not empty member.getDay(index)}">
 					<input type = "hidden" name = "pos" value = "${index }">
+					${index }
 					<button name = "action" value = "modify" onclick = "location.href='/shiftCollection/Modify.servlet'">修正</button>
 					<button name = "action" value = "delete" onclick = "location.href='/shiftCollection/Delete.servlet'">削除</button>
 					<br>
