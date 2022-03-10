@@ -40,7 +40,7 @@
 				<option ${beginHour == 17 ? "selected" : ""} value = "17">17
 				<option ${beginHour == 18 ? "selected" : ""} value = "18">18
 				<option ${beginHour == 19 ? "selected" : ""} value = "19">19
-				<option ${beginHourH == 20 ? "selected" : ""} value = "20">20
+				<option ${beginHour == 20 ? "selected" : ""} value = "20">20
 				<option ${beginHour == 21 ? "selected" : ""} value = "21">21
 				<option ${beginHour == 22 ? "selected" : ""} value = "22">22
 			</select> : 

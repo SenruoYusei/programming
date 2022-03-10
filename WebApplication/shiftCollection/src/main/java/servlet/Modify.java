@@ -51,7 +51,7 @@ public class Modify extends HttpServlet {
 		String s = bH + ":" + bM + "," + eH + ":" + eM + "," + request.getParameter("memo");
 		if(bH != null) {
 			m.setSchedule(dayPos, s);
-			session.setAttribute("member", s);
+			session.setAttribute("member", m);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}else {
