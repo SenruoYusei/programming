@@ -20,6 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
+		<p>おためし</p>
 	</div>
 </body>
 </html>
