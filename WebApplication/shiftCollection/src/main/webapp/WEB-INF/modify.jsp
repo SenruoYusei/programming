@@ -20,7 +20,8 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
-		<p>${member.getDay(index)} : ${info}</p>
+		変更前<br>
+		<p>${member.getDay(index)} : ${member.getSchedule(index)}</p>
 		
 		修正後<br>
 		<form action = "/shiftCollection/Modify" method = "post">
