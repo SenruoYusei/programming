@@ -25,7 +25,7 @@
 				<c:set var = "info" value = "${member.getSchedule(index) }"/>
 				<p>${member.getDay(index)} : ${info }</p>
 				<form action = "/shiftCollection/RegisterConfirmServlet" method = "post">
-				<c:if test = "${member.getSchedule(index) != ''}">
+				<c:if test = "${member.getSchedule(index) != '' and !empty member.getSchedule(index)}">
 					<input type = "hidden" name = "pos" value = "${index }">
 					${index }
 					<button name = "action" value = "modify">修正</button>
