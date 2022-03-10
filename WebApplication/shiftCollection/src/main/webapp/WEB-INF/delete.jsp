@@ -25,7 +25,7 @@
 		上記の日程を削除してもよろしいですか？
 		
 		<form action = "/shiftCollection/Delete" method = "post">
-			<input type = "hidden" name = "deletePos" value = "${deletePos }">
+			<input type = "hidden" name = "pos" value = "${deletePos }">
 			<button name = "flag" value = "1">はい</button>
 			<button name = "flag" value = "0">いいえ</button>
 		</form>

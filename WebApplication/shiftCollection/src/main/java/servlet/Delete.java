@@ -43,11 +43,12 @@ public class Delete extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		Member m = (Member)session.getAttribute("member");
-		int dayPos = Integer.parseInt(request.getParameter("deletePos"));
+		int dayPos = Integer.parseInt(request.getParameter("pos"));
 		String flag = request.getParameter("flag");
 		if(flag.equals("1")) {
 			m.deleteSchedule(dayPos);
 			session.setAttribute("member", m);
+			session.removeAttribute("deletePos");
 			RequestDispatcher d = request.getRequestDispatcher("WEB-INF/confirm.jsp");
 			d.forward(request, response);
 		}else {
