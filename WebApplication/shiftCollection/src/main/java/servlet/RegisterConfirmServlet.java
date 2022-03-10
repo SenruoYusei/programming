@@ -45,7 +45,7 @@ public class RegisterConfirmServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		int deletePos = Integer.parseInt(request.getParameter("pos"));
 		if(action.equals("modify")) {
-			//session.setAttribute("modifyPos", deletePos);
+			session.setAttribute("modifyPos", deletePos);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}else if(action.equals("delete")) {
