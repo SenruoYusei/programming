@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>dayNum変更</p>
+		<p>delete変更</p>
 	</div>
 </body>
 </html>

@@ -49,7 +49,7 @@ public class RegisterConfirmServlet extends HttpServlet {
 			d.forward(request, response);
 		}else if(action.equals("delete")) {
 			session.setAttribute("deletePos", deletePos);
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/confirm.jsp");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/delete.jsp");
 			d.forward(request, response);
 		}
 	}
