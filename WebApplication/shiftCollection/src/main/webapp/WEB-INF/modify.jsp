@@ -73,7 +73,7 @@
 			備考欄 : <input type = "text" name = "memo">
 			<input type = "submit" value = "修正"><br>
 		</form>
-		変更後 : <p>${member.getDay(index) : ${info}}</p>
+		変更後 : <p>${member.getDay(index)} :${member.getSchedule(index)} </p>
 		以上でよろしいですか？
 		<a href = "/shiftCollection/RegisterConfirmServlet">はい</a>
 		<a href = "/shiftCollection/Modify">やり直す</a><br>
