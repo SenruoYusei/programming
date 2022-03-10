@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.LoginLogic;
 import model.Member;
 
 /**
@@ -28,7 +29,14 @@ public class termServlet extends HttpServlet {
 		Member m = (Member) session.getAttribute("member");
 		//ログイン情報 となる m を取り出すことで，ログインできているかを確認
 		
-		if(m == null)response.sendRedirect("/shiftCollection/loginError.jsp");
+		if(m == null) {
+			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
+			response.sendRedirect("/shiftCollection/welcome.jsp");
+		}else if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
+			LoginLogic llogic = new LoginLogic();
+			llogic.updateAll(m);
+			m.updateCompleted();
+		}
 		else {
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerTerm.jsp");
 			d.forward(request, response);
