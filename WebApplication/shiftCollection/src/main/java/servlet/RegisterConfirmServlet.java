@@ -26,8 +26,10 @@ public class RegisterConfirmServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		Member m = (Member)session.getAttribute("member");
-		if(m == null)response.sendRedirect("/shiftCollection/loginError.jsp");
-		else {
+		if(m == null) {
+			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
+			response.sendRedirect("/shiftCollection/welcome.jsp");
+		}else {
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/confirm.jsp");
 			d.forward(request, response);
 		}
@@ -43,7 +45,7 @@ public class RegisterConfirmServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		int deletePos = Integer.parseInt(request.getParameter("pos"));
 		if(action.equals("modify")) {
-			session.setAttribute("modifyPos", deletePos);
+			//session.setAttribute("modifyPos", deletePos);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}else if(action.equals("delete")) {

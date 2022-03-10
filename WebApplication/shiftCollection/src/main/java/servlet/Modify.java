@@ -26,8 +26,10 @@ public class Modify extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		Member m = (Member)session.getAttribute("member");
-		if(m == null)response.sendRedirect("/shiftCollection/loginError.jsp");
-		else {
+		if(m == null) {
+			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
+			response.sendRedirect("/shiftCollection/welcome.jsp");
+		}else {
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}
@@ -49,11 +51,12 @@ public class Modify extends HttpServlet {
 		String s = bH + ":" + bM + "," + eH + ":" + eM + "," + request.getParameter("memo");
 		if(bH != null) {
 			m.setSchedule(dayPos, s);
+			session.setAttribute("member", s);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}else {
 			request.setAttribute("registerError", "日程が正確に入力されていません");
-			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/nodify.jsp");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/modify.jsp");
 			d.forward(request, response);
 		}
 	}

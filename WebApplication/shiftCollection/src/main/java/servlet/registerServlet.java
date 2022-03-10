@@ -30,8 +30,10 @@ public class registerServlet extends HttpServlet {
 		session.setAttribute("beginMinute", "30");
 		session.setAttribute("endHour", "22");
 		session.setAttribute("endMinute", "15");
-		if(m == null)response.sendRedirect("/shiftCollection/loginError.jsp");
-		else {
+		if(m == null) {
+			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
+			response.sendRedirect("/shiftCollection/welcome.jsp");
+		}else {
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
 		}
