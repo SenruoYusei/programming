@@ -7,10 +7,10 @@ public class LoginLogic {//ユーザー登録の際に登録情報を持ちた�
 	private MemberDAO dao;
 	public LoginLogic() {
 		dao = new MemberDAO();
+		members = dao.findAll();
 		manager = new Member(99,"***","7777",0,0);
 	}
 	public MemberSet getMemberList(){
-		members = dao.findAll();
 		return members;
 	}
 	/*
