@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>delete更に更に更に変更</p>
+		<p>リンク削除</p>
 	</div>
 </body>
 </html>
