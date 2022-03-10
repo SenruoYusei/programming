@@ -24,7 +24,7 @@
 				<c:set var = "index" value = "${ status.index}"/>
 				<c:set var = "info" value = "${member.getSchedule(index) }"/>
 				<p>${member.getDay(index)} : ${info }</p>
-				<c:if test = "${not empty member.getDay(index)}">
+				<c:if test = "${member.getSchedule(index) != ''}">
 					<input type = "hidden" name = "pos" value = "${index }">
 					${index }
 					<button name = "action" value = "modify">修正</button>

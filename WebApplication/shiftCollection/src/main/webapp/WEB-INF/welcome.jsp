@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>リンク削除</p>
+		<p>getSchedule</p>
 	</div>
 </body>
 </html>
