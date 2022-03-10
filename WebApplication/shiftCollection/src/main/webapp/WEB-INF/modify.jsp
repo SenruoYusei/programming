@@ -20,11 +20,11 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
-		<p>${member.getDay(index)} : ${info}}</p>
+		<p>${member.getDay(index)} : ${info}</p>
 		
 		修正後<br>
 		<form action = "/shiftCollection/Modify" method = "post">
-			${member.getDay(index) :　}
+			${member.getDay(index)}
 			<select name = "beginHour">
 				<option ${beginHour == 8 ? "selected" : ""} value = "8">8
 				<option ${beginHour == 9 ? "selected" : ""} value = "9">9
