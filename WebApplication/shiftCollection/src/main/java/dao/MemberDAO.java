@@ -169,7 +169,7 @@ public class MemberDAO {
 				sql += "DAY" + i + " = ?, ";
 			}
 			sql += "DAY15  = ? ";
-			sql += "FROM MEMBERS WHERE ID = ?";
+			sql += "WHERE ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
