@@ -21,10 +21,10 @@
 		</c:choose><br>
 		<!-- ${modifyPos }-->
 		<c:set var = "index" value = "${modifyPos }"/>
-		変更前<br>
+		変更前
 		<p>${member.getDay(index)} : ${member.getSchedule(index)}</p>
 		
-		修正後<br>
+		修正<br>
 		<form action = "/shiftCollection/Modify" method = "post">
 			${member.getDay(index)}
 			<input type = "hidden" name = "ModifyPos" value = "${index}">
@@ -75,7 +75,8 @@
 			備考欄 : <input type = "text" name = "memo">
 			<input type = "submit" value = "修正"><br>
 		</form>
-		変更後 : <p>${member.getDay(index)} :${member.getSchedule(index)} </p>
+		
+		変更後 : ${member.getDay(index)} :${member.getSchedule(index)}<br>
 		以上でよろしいですか？
 		<a href = "/shiftCollection/RegisterConfirmServlet">はい</a>
 		<a href = "/shiftCollection/Modify">やり直す</a><br>
