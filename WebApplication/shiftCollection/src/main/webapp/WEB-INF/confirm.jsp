@@ -27,7 +27,6 @@
 				<form action = "/shiftCollection/RegisterConfirmServlet" method = "post">
 				<c:if test = "${member.getSchedule(index) != '' and !empty member.getSchedule(index)}">
 					<input type = "hidden" name = "pos" value = "${index }">
-					${index }
 					<button name = "action" value = "modify">修正</button>
 					<button name = "action" value = "delete">削除</button>
 					<br>

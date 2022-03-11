@@ -20,11 +20,13 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
+		<!-- 
 		dayPos = "${dayPos }"
 		beginHour = "${beginHour }"
 		beginMinute = "${beginMinute }"
 		endHour = "${endHour }"
 		endMinute = "${endMinute }"
+		-->
 		<c:set var = "tNum" value = "${member.termNum == 0 ? 0 : 15 }"/>
 		<c:if test = "${not empty registerError }">
 			<p>${registerError}</p>

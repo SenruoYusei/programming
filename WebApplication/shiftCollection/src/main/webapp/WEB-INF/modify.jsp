@@ -19,7 +19,7 @@
 			<c:when test = "${term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
-		${modifyPos }
+		<!-- ${modifyPos }-->
 		<c:set var = "index" value = "${modifyPos }"/>
 		変更前<br>
 		<p>${member.getDay(index)} : ${member.getSchedule(index)}</p>
