@@ -57,6 +57,7 @@ public class ChangePassServlet extends HttpServlet {
 			
 			LoginLogic llogic = new LoginLogic();
 			llogic.updateAll(m);
+			m.updateCompleted();
 			
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
 			d.forward(request, response);
