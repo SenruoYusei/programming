@@ -57,6 +57,45 @@ public class MemberDAO {
 		return m;
 	}
 	*/
+	public Member findMember(String name, String pass) {
+		Member m = null;
+		Connection connection = null;
+		try {
+			Class.forName(driverName);
+			connection = DriverManager.getConnection(jdbcurl);
+			String sql = "SELECT ID, NAME, PASS, MNUM, TERM ";
+			for(int i = 0;i < 15;i++) {
+				sql += "DAY" + i + ",";
+			}
+			sql += "DAY15";
+			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
+			PreparedStatement pStmt = connection.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, pass);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				int id = rs.getInt("ID");
+				int month = rs.getInt("MNUM");
+				int term = rs.getInt("TERM");
+				m = new Member(id, name, pass, month, term);
+				String[] sche = new String[m.getDayNum()];
+				for(int i = 0;i < sche.length;i++) {
+					String d = "DAY" + i;
+					sche[i] = rs.getString(d);
+				}
+				m.setSchedule(sche);
+			}
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return m;
+	}
+	/*
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
@@ -84,7 +123,7 @@ public class MemberDAO {
 		}
 		return m;
 	}
-	
+	*/
 	
 	public MemberSet findAll() {//DB にあるメンバーのアカウントを取得し格納した ArrayList を返す
 		MemberSet members = new MemberSet();
