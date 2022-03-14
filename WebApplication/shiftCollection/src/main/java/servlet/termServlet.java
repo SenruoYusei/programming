@@ -35,8 +35,6 @@ public class termServlet extends HttpServlet {
 		}else if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
 			LoginLogic llogic = new LoginLogic();
 			llogic.updateAll(m);
-			//MemberDAO dao = new MemberDAO();
-			//dao.updateAll(m);
 			m.updateCompleted();
 		}
 		

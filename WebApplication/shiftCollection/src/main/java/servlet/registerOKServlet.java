@@ -28,8 +28,6 @@ public class registerOKServlet extends HttpServlet {
 		Member m = (Member) session.getAttribute("member");
 		LoginLogic llogic = new LoginLogic();
 		llogic.updateAll(m);
-//		MemberDAO dao = new MemberDAO();
-//		dao.updateAll(m);
 		m.updateCompleted();
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerOK.jsp");
 		d.forward(request, response);

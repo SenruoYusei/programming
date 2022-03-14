@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import model.LoginLogic;
 import model.Member;
+import model.MemberSet;
 
 /**
  * Servlet implementation class WelcomeServlet
@@ -26,8 +28,14 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-//		MemberDAO dao = new MemberDAO();
+		ServletContext application = this.getServletContext();
 		LoginLogic llogic = new LoginLogic();
+		MemberSet members = (MemberSet) application.getAttribute("members");
+		if(members == null) {
+			members = llogic.getMemberList();
+			application.setAttribute("members", members);//アプリケーションで持つスコープ
+		}
+		
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
 		if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
@@ -45,9 +53,14 @@ public class WelcomeServlet extends HttpServlet {
 		String userPass = request.getParameter("pass");
 		
 		if(userName != null && userPass != null) {//ユーザー名，パスワードが入力されたとき
-//			MemberDAO dao = new MemberDAO();
+			ServletContext application = this.getServletContext();
+			MemberSet members = (MemberSet) application.getAttribute("members");
 			LoginLogic llogic = new LoginLogic();
-			Member m = llogic.getLoginAccount(userName, userPass);
+			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
+				members = llogic.getMemberList();
+				application.setAttribute("members", members);
+			}
+			Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
 			
 			if(m == null) {//ユーザーまたは管理者でない場合
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
