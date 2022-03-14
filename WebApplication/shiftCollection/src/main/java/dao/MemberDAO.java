@@ -75,13 +75,15 @@ public class MemberDAO {
 			pStmt.setString(2, pass);
 			
 			ResultSet rs = pStmt.executeQuery();
-			m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
-			String[] sche = new String[m.getDayNum()];
-			for(int i = 0;i < sche.length;i++) {
-				String d = "DAY" + i;
-				sche[i] = rs.getString(d);
+			if(rs.next()) {
+				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
+				String[] sche = new String[m.getDayNum()];
+				for(int i = 0;i < sche.length;i++) {
+					String d = "DAY" + i;
+					sche[i] = rs.getString(d);
+				}
+				m.setSchedule(sche);
 			}
-			m.setSchedule(sche);
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {
