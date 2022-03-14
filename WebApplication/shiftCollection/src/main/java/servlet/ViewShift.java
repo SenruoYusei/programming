@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.LoginLogic;
+import dao.MemberDAO;
 import model.MemberSet;
 
 /**
@@ -37,8 +37,10 @@ public class ViewShift extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int month = Integer.parseInt(request.getParameter("month"));
 		int term = Integer.parseInt(request.getParameter("term"));
-		LoginLogic llogic = new LoginLogic();
-		MemberSet members = llogic.getMemberList();
+		//LoginLogic llogic = new LoginLogic();
+		//MemberSet members = llogic.getMemberList();
+		MemberDAO dao = new MemberDAO();
+		MemberSet members = dao.findAll();
 		String[] output = members.getSubmittedSchedule(month, term);
 		HttpSession session = request.getSession();
 		session.setAttribute("output", output);
