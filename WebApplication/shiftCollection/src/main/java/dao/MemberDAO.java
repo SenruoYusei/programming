@@ -240,7 +240,7 @@ public class MemberDAO {
 			for(int i = 0;i < dayNum;i++) {
 				pStmt.setString(4 + i,m.getSchedule(i));
 			}
-			pStmt.setInt(20, m.getId());
+			pStmt.setInt(4 + dayNum, m.getId());
 			//DB を更新
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
