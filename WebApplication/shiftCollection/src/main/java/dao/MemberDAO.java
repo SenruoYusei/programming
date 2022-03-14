@@ -63,7 +63,7 @@ public class MemberDAO {
 		try {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(jdbcurl);
-			String sql = "SELECT ID, NAME, PASS, MNUM, TERM ";
+			String sql = "SELECT ID, MNUM, TERM ";
 			for(int i = 0;i < 15;i++) {
 				sql += "DAY" + i + ",";
 			}
@@ -76,10 +76,7 @@ public class MemberDAO {
 			ResultSet rs = pStmt.executeQuery();
 			
 			if(rs.next()) {
-				int id = rs.getInt("ID");
-				int month = rs.getInt("MNUM");
-				int term = rs.getInt("TERM");
-				m = new Member(id, name, pass, month, term);
+				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
 				String[] sche = new String[m.getDayNum()];
 				for(int i = 0;i < sche.length;i++) {
 					String d = "DAY" + i;
