@@ -75,7 +75,7 @@ public class MemberDAO {
 			pStmt.setString(2, pass);
 			
 			ResultSet rs = pStmt.executeQuery();
-			m = new Member(rs.getInt("ID"), rs.getString("NAME"), rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"));
+			m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
 			String[] sche = new String[m.getDayNum()];
 			for(int i = 0;i < sche.length;i++) {
 				String d = "DAY" + i;
