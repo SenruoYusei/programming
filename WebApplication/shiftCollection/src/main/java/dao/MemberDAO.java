@@ -16,6 +16,7 @@ public class MemberDAO {
 	private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
 	public MemberDAO() {
+		//Class.forName(driverName);
 	}
 //	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 //		Member m = null;
@@ -59,6 +60,39 @@ public class MemberDAO {
 //	}
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
+		Connection conn = null;
+		try{
+			Class.forName(driverName);
+			conn = DriverManager.getConnection(jdbcurl);
+			String sql = "SELECT ID, MNUM, TERM, ";
+			for(int i = 0;i < 15;i++) {
+				sql += "DAY" + i + ",";
+			}
+			sql += "DAY15";
+			sql += " FROM MEMBERS WHERE ID = ? AND PASS = ?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, pass);
+			
+			ResultSet rs = pStmt.executeQuery();
+			m = new Member(rs.getInt("ID"), rs.getString("NAME"), rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"));
+			String[] sche = new String[m.getDayNum()];
+			for(int i = 0;i < sche.length;i++) {
+				String d = "DAY" + i;
+				sche[i] = rs.getString(d);
+			}
+			m.setSchedule(sche);
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return m;
+	}
+	/*
+	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
+		Member m = null;
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT ID, MNUM, TERM, ";
 			for(int i = 0;i < 15;i++) {
@@ -84,6 +118,7 @@ public class MemberDAO {
 		}
 		return m;
 	}
+	*/
 	
 	
 	public MemberSet findAll() {//DB にあるメンバーのアカウントを取得し格納した ArrayList を返す
