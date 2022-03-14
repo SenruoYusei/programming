@@ -10,13 +10,12 @@ import java.util.Date;
 
 import model.Member;
 import model.MemberSet;
-import model.User;
 
 
 public class MemberDAO {
 	private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
-	
+	/*
 	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
 		Connection connection = null;
@@ -57,6 +56,7 @@ public class MemberDAO {
 		}
 		return m;
 	}
+	*/
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
