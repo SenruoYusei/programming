@@ -18,65 +18,31 @@ public class MemberDAO {
 	public MemberDAO() {
 		//Class.forName(driverName);
 	}
-//	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
-//		Member m = null;
-//		Connection connection = null;
-//		try {
-//			Class.forName(driverName);
-//			connection = DriverManager.getConnection(jdbcurl);
-//			String sql = "SELECT ID, NAME, PASS, MNUM, TERM ";
-//			for(int i = 0;i < 15;i++) {
-//				sql += "DAY" + i + ",";
-//			}
-//			sql += "DAY15";
-//			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
-//			PreparedStatement pStmt = connection.prepareStatement(sql);
-//			pStmt.setString(1, u.getName());
-//			pStmt.setString(2, u.getPass());
-//			
-//			ResultSet rs = pStmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				int id = rs.getInt("ID");
-//				String name = rs.getString("NAME");
-//				String pass = rs.getString("PASS");
-//				int month = rs.getInt("MNUM");
-//				int term = rs.getInt("TERM");
-//				m = new Member(id, name, pass, month, term);
-//				String[] sche = new String[m.getDayNum()];
-//				for(int i = 0;i < sche.length;i++) {
-//					String d = "DAY" + i;
-//					sche[i] = rs.getString(d);
-//				}
-//				m.setSchedule(sche);
-//			}
-//		}catch(ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//		return m;
-//	}
-	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
+	public Member findMember(String getName, String getPass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
-		Connection conn = null;
-		try{
+		Connection connection = null;
+		try {
 			Class.forName(driverName);
-			conn = DriverManager.getConnection(jdbcurl);
-			String sql = "SELECT ID, MNUM, TERM, ";
+			connection = DriverManager.getConnection(jdbcurl);
+			String sql = "SELECT ID, NAME, PASS, MNUM, TERM ";
 			for(int i = 0;i < 15;i++) {
 				sql += "DAY" + i + ",";
 			}
 			sql += "DAY15";
 			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, name);
-			pStmt.setString(2, pass);
+			PreparedStatement pStmt = connection.prepareStatement(sql);
+			pStmt.setString(1, getName);
+			pStmt.setString(2, getPass);
 			
 			ResultSet rs = pStmt.executeQuery();
+			
 			if(rs.next()) {
-				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
+				int id = rs.getInt("ID");
+				String name = rs.getString("NAME");
+				String pass = rs.getString("PASS");
+				int month = rs.getInt("MNUM");
+				int term = rs.getInt("TERM");
+				m = new Member(id, name, pass, month, term);
 				String[] sche = new String[m.getDayNum()];
 				for(int i = 0;i < sche.length;i++) {
 					String d = "DAY" + i;
@@ -92,6 +58,40 @@ public class MemberDAO {
 		}
 		return m;
 	}
+//	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
+//		Member m = null;
+//		Connection conn = null;
+//		try{
+//			Class.forName(driverName);
+//			conn = DriverManager.getConnection(jdbcurl);
+//			String sql = "SELECT ID, MNUM, TERM, ";
+//			for(int i = 0;i < 15;i++) {
+//				sql += "DAY" + i + ",";
+//			}
+//			sql += "DAY15";
+//			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
+//			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setString(1, name);
+//			pStmt.setString(2, pass);
+//			
+//			ResultSet rs = pStmt.executeQuery();
+//			if(rs.next()) {
+//				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"));
+//				String[] sche = new String[m.getDayNum()];
+//				for(int i = 0;i < sche.length;i++) {
+//					String d = "DAY" + i;
+//					sche[i] = rs.getString(d);
+//				}
+//				m.setSchedule(sche);
+//			}
+//		}catch(ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//		return m;
+//	}
 	/*
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;

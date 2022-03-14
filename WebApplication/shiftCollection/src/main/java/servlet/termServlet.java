@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MemberDAO;
+import model.LoginLogic;
 import model.Member;
 
 /**
@@ -33,10 +33,10 @@ public class termServlet extends HttpServlet {
 			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
 			response.sendRedirect("/shiftCollection/welcome.jsp");
 		}else if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-			//LoginLogic llogic = new LoginLogic();
-			//llogic.updateAll(m);
-			MemberDAO dao = new MemberDAO();
-			dao.updateAll(m);
+			LoginLogic llogic = new LoginLogic();
+			llogic.updateAll(m);
+			//MemberDAO dao = new MemberDAO();
+			//dao.updateAll(m);
 			m.updateCompleted();
 		}
 		
