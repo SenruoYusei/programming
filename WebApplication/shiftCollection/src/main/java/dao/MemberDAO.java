@@ -69,7 +69,7 @@ public class MemberDAO {
 				sql += "DAY" + i + ",";
 			}
 			sql += "DAY15";
-			sql += " FROM MEMBERS WHERE ID = ? AND PASS = ?;";
+			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, name);
 			pStmt.setString(2, pass);
