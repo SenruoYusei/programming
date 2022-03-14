@@ -2,16 +2,12 @@ package model;
 import dao.MemberDAO;
 //メンバーのid をどこに定義するか
 public class LoginLogic {//ユーザー登録の際に登録情報を持ちたい
-	private MemberSet members;
-	private Member manager;
 	private MemberDAO dao;
 	public LoginLogic() {
 		dao = new MemberDAO();
-		members = dao.findAll();
-		manager = new Member(99,"***","7777",0,0);
 	}
 	public MemberSet getMemberList(){
-		return members;
+		return dao.findAll();
 	}
 	/*
 	public Member getLoginAccount (User u) {
@@ -22,12 +18,17 @@ public class LoginLogic {//ユーザー登録の際に登録情報を持ちた�
 		return null;
 	}
 	*/
+	/*
 	public Member getLoginAccount (String userName, String userPass) {
 		if(manager.isMatched(userName, userPass))return manager;
 		for(Member m : members) {
 			if(m.isMatched(userName, userPass))return m;
 		}
 		return null;
+	}
+	*/
+	public Member getLoginAccount (String userName, String userPass) {
+		return dao.findMember(userName, userPass);
 	}
 	public void updateAll(Member m) {
 		dao.updateAll(m);

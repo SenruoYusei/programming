@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.LoginLogic;
+import dao.MemberDAO;
 import model.Member;
 /**
  * Servlet implementation class registerOKServlet
@@ -26,8 +26,10 @@ public class registerOKServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
-		LoginLogic llogic = new LoginLogic();
-		llogic.updateAll(m);
+		//LoginLogic llogic = new LoginLogic();
+		//llogic.updateAll(m);
+		MemberDAO dao = new MemberDAO();
+		dao.updateAll(m);
 		m.updateCompleted();
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerOK.jsp");
 		d.forward(request, response);
