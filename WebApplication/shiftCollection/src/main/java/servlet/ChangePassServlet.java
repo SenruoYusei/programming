@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.LoginLogic;
+import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -55,10 +55,12 @@ public class ChangePassServlet extends HttpServlet {
 			m.setNewPass(newPass);
 			session.setAttribute("member", m);
 			
-			LoginLogic llogic = new LoginLogic();
-			llogic.updateAll(m);
-			m.updateCompleted();
+//			LoginLogic llogic = new LoginLogic();
+//			llogic.updateAll(m);
 			
+			MemberDAO dao = new MemberDAO();
+			dao.updateAll(m);
+			m.updateCompleted();
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
 			d.forward(request, response);
 		}

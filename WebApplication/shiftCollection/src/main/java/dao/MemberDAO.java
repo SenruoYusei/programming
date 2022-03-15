@@ -15,6 +15,9 @@ import model.MemberSet;
 public class MemberDAO {
 	private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
+	public MemberDAO() {
+		
+	}
 	/*
 	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
