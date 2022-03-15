@@ -93,8 +93,8 @@ public class MemberDAO {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT * FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, name);
-			pStmt.setString(2, pass);
+			pStmt.setString(1, "'" + name + "'");
+			pStmt.setString(2, "'" + pass + "'");
 			
 			ResultSet rs = pStmt.executeQuery();
 			String[] s = new String[16];
