@@ -57,39 +57,37 @@ public class MemberDAO {
 		return m;
 	}
 	*/
-	public Member findMember(String name, String pass) {
-		Member m = null;
-		Connection connection = null;
-		try {
-			Class.forName(driverName);
-			connection = DriverManager.getConnection(jdbcurl);
-			String sql = "SELECT ID, MNUM, TERM, ";
-			for(int i = 0;i < 15;i++) {
-				sql += "DAY" + i + ",";
-			}
-			sql += "DAY15";
-			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
-			PreparedStatement pStmt = connection.prepareStatement(sql);
-			pStmt.setString(1, name);
-			pStmt.setString(2, pass);
-			
-			ResultSet rs = pStmt.executeQuery();
-			if(rs.next()) {
-				String[] s = new String[16];
-				for(int i = 0;i < 16;i++) {
-					s[i] = rs.getString("DAY" + i);
-				}
-				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"), s);
-			}
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return m;
-	}
-	/*
+//	public Member findMember(String name, String pass) {
+//		Member m = null;
+//		Connection connection = null;
+//		try {
+//			Class.forName(driverName);
+//			connection = DriverManager.getConnection(jdbcurl);
+//			String sql = "SELECT ID, MNUM, TERM, ";
+//			for(int i = 0;i < 15;i++) {
+//				sql += "DAY" + i + ",";
+//			}
+//			sql += "DAY15";
+//			sql += " FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
+//			PreparedStatement pStmt = connection.prepareStatement(sql);
+//			pStmt.setString(1, name);
+//			pStmt.setString(2, pass);
+//			
+//			ResultSet rs = pStmt.executeQuery();
+//			String[] s = new String[16];
+//			for(int i = 0;i < 16;i++) {
+//				s[i] = rs.getString("DAY" + i);
+//			}
+//			m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"), s);
+//		}catch(ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//		return m;
+//	}
+	
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
@@ -104,20 +102,18 @@ public class MemberDAO {
 			pStmt.setString(2, pass);
 			
 			ResultSet rs = pStmt.executeQuery();
-			m = new Member(rs.getInt("ID"), rs.getString("NAME"), rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"));
-			String[] sche = new String[m.getDayNum()];
-			for(int i = 0;i < sche.length;i++) {
-				String d = "DAY" + i;
-				sche[i] = rs.getString(d);
+			String[] s = new String[16];
+			for(int i = 0;i < 16;i++) {
+				s[i] = rs.getString("DAY" + i);
 			}
-			m.setSchedule(sche);
+			m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"), s);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		return m;
 	}
-	*/
+	
 	
 	public MemberSet findAll() {//DB にあるメンバーのアカウントを取得し格納した ArrayList を返す
 		MemberSet members = new MemberSet();
