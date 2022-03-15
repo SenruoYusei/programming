@@ -63,7 +63,7 @@ public class MemberDAO {
 		try {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(jdbcurl);
-			String sql = "SELECT ID, MNUM, TERM ";
+			String sql = "SELECT ID, MNUM, TERM, ";
 			for(int i = 0;i < 15;i++) {
 				sql += "DAY" + i + ",";
 			}
