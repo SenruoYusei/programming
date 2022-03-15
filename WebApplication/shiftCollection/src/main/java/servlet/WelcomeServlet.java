@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
+import model.LoginLogic;
 import model.Member;
 import model.MemberSet;
 
@@ -30,21 +31,21 @@ public class WelcomeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		ServletContext application = this.getServletContext();
-//		LoginLogic llogic = new LoginLogic();
-		dao = new MemberDAO();
+		LoginLogic llogic = new LoginLogic();
+//		dao = new MemberDAO();
 		
 		MemberSet members = (MemberSet) application.getAttribute("members");
 		if(members == null) {
-//			members = llogic.getMemberList();
-			members = dao.findAll();
+			members = llogic.getMemberList();
+//			members = dao.findAll();
 			application.setAttribute("members", members);//アプリケーションで持つスコープ
 		}
 		
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
 		if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-//			llogic.updateAll(m);
-			dao.updateAll(m);
+			llogic.updateAll(m);
+//			dao.updateAll(m);
 			m.updateCompleted();
 		}
 		
@@ -60,14 +61,14 @@ public class WelcomeServlet extends HttpServlet {
 		if(userName != null && userPass != null) {//ユーザー名，パスワードが入力されたとき
 			ServletContext application = this.getServletContext();
 			MemberSet members = (MemberSet) application.getAttribute("members");
-//			LoginLogic llogic = new LoginLogic();
+			LoginLogic llogic = new LoginLogic();
 			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
-//				members = llogic.getMemberList();
-				dao.findAll();
+				members = llogic.getMemberList();
+//				dao.findAll();
 				application.setAttribute("members", members);
 			}
-//			Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
-			Member m = dao.findMember(userName, userPass);
+			Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
+//			Member m = dao.findMember(userName, userPass);
 			
 			if(m == null) {//ユーザーまたは管理者でない場合
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
