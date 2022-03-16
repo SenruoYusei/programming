@@ -98,11 +98,13 @@ public class MemberDAO {
 			//pStmt.setString(2, pass);
 			
 			ResultSet rs = pStmt.executeQuery();
-			String[] s = new String[16];
-			for(int i = 0;i < 16;i++) {
-				s[i] = rs.getString("DAY" + i);
+			while(rs.next()) {
+				String[] s = new String[16];
+				for(int i = 0;i < 16;i++) {
+					s[i] = rs.getString("DAY" + i);
+				}
+				m = new Member(rs.getInt("ID"), name, rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"), s);
 			}
-			m = new Member(rs.getInt("ID"), name, rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"), s);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
