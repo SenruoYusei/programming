@@ -91,17 +91,18 @@ public class MemberDAO {
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "SELECT * FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
+			String sql = "SELECT * FROM MEMBERS WHERE NAME = ?;";
+			//" AND PASS = ?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, name);
-			pStmt.setString(2, pass);
+			//pStmt.setString(2, pass);
 			
 			ResultSet rs = pStmt.executeQuery();
 			String[] s = new String[16];
 			for(int i = 0;i < 16;i++) {
 				s[i] = rs.getString("DAY" + i);
 			}
-			m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"), s);
+			m = new Member(rs.getInt("ID"), name, rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"), s);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
