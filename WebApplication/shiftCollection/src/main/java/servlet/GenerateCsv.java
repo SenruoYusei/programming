@@ -31,8 +31,9 @@ public class GenerateCsv extends HttpServlet {
 		String filename = "output.csv";
 		//GenerateCSV gc = new GenerateCSV(output, filename);
 		
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+
 		response.setHeader("Context-Type", "text/csv; charset=UTF-8");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
 		PrintWriter out = response.getWriter();
 		for(int i = 0;i < output.length;i++) {
 			out.append(",シフト\n");
