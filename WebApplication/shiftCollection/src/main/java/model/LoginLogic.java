@@ -25,9 +25,7 @@ public class LoginLogic {//ユーザー登録の際に登録情報を持ちた�
 	*/
 	
 	public Member getLoginAccount (String userName, String userPass) {
-		Member m = dao.findMember(userName, userPass);
-		if(m.isMatched(userName, userPass))return m;
-		return null;
+		return dao.findMember(userName, userPass);
 		/*
 		if(manager.isMatched(userName, userPass))return manager;
 		for(Member m : members) {
