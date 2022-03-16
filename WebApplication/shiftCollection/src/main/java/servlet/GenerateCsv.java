@@ -32,7 +32,7 @@ public class GenerateCsv extends HttpServlet {
 		//GenerateCSV gc = new GenerateCSV(output, filename);
 		
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-		response.setHeader("Context-Type", "text/csv; charset=Shift_JIS");
+		response.setHeader("Context-Type", "text/csv; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		for(int i = 0;i < output.length;i++) {
 			out.append(",シフト\n");
