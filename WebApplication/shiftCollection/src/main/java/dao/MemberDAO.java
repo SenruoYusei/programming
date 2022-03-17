@@ -13,7 +13,7 @@ import model.MemberSet;
 
 
 public class MemberDAO {
-	private String driverName = "org.mysql.Driver";
+	//private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
 	/*
 	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
@@ -90,10 +90,7 @@ public class MemberDAO {
 	
 	public Member findMember(String name, String pass) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
 		Member m = null;
-		Connection conn = null;
-		try {
-			Class.forName(driverName);
-			conn = DriverManager.getConnection(jdbcurl);
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT * FROM MEMBERS WHERE NAME = ? AND PASS = ?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, name);
@@ -107,14 +104,11 @@ public class MemberDAO {
 				}
 				m = new Member(rs.getInt("ID"), name, pass, rs.getInt("MNUM"), rs.getInt("TERM"), s);
 			}
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			return null;
+			return m;
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return m;
 	}
 	
 	public MemberSet findAll() {
