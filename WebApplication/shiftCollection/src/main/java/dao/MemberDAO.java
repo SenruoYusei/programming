@@ -13,7 +13,7 @@ import model.MemberSet;
 
 
 public class MemberDAO {
-	private String driverName = "org.mysql.Driver";
+	//private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
 	/*
 	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
@@ -111,7 +111,39 @@ public class MemberDAO {
 		return m;
 	}
 	
-	
+	public MemberSet findAll() {
+		MemberSet members = new MemberSet();
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "SELECT * FROM MEMBERS WHERE ID < 99;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			while(rs.next()) {
+				String[] s = new String[16];
+				for(int i = 0;i < s.length;i++) {
+					s[i] = rs.getString("DAY" + i);
+				}
+				members.add(new Member(rs.getInt("ID"), rs.getString("NAME"), rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"), s));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return members;
+	}
+	public void addMembers(MemberSet newMembers) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "INSERT INTO MEMBERS (NAME, PASS) VALUES";
+			for(int i = 0;i < newMembers.size() - 1;i++) {
+				sql += " (" +newMembers.get(i).getName() + ", " +newMembers.get(i).getPass()+ "),";
+			}
+			sql += " (" +newMembers.get(newMembers.size() - 1).getName() + ", " +newMembers.get(newMembers.size() - 1).getPass()+ ");";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	/*
 	public MemberSet findAll() {//DB にあるメンバーのアカウントを取得し格納した ArrayList を返す
 		MemberSet members = new MemberSet();
 		//try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
@@ -141,7 +173,7 @@ public class MemberDAO {
 		}
 		return members;
 	}
-	
+	*/
 	public int getDayNum(int m, int t) {
 		if(m == 1) {
 			Date d = new Date();

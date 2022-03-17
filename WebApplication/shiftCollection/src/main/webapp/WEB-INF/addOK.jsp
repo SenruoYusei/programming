@@ -6,14 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name = "viewport" content = "width=device-width,user-scalable=no,maximum-scale=1"/>
-<title>管理者ログイン</title>
+<title>スポ館シフト提出フォーム</title>
 <link rel = "stylesheet" type = "text/css" href = "/shiftCollection/css/test.css">
 </head>
 <body>
 	<div>
-		<p>管理者さん，ようこそ</p>
-		<a href = "/shiftCollection/ViewShift"> ファイルの出力</a><br>
-		<a href = "/shiftCollection/ShowMember"> メンバーの表示</a><br>
+		<h1>シフトの登録が完了しました．</h1>
+		<a href = "/shiftCollection/WelcomeServlet">トップへ</a><br>
+		<a href = "/shiftCollection/DeleteMember">メンバーの削除</a><br>
+		
 	</div>
 </body>
 </html>
