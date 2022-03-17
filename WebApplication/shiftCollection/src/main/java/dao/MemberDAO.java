@@ -109,6 +109,7 @@ public class MemberDAO {
 			}
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
