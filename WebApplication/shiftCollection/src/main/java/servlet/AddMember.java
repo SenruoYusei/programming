@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
 import model.Member;
@@ -44,7 +45,8 @@ public class AddMember extends HttpServlet {
 		}
 		if(!members.isEmpty()) {
 			MemberDAO dao = new MemberDAO();
-			dao.addMembers(members);
+			HttpSession session = request.getSession();
+			dao.addMembers(members, (int)session.getAttribute("memberNum"));
 		}
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
 		d.forward(request, response);

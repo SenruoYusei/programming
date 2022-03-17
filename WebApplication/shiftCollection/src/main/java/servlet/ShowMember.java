@@ -29,6 +29,7 @@ public class ShowMember extends HttpServlet {
 		MemberSet members = dao.findAll();
 		HttpSession session = request.getSession();
 		session.setAttribute("members", members);
+		session.setAttribute("memberNum", members.size());
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/showMember.jsp");
 		d.forward(request, response);
 	}

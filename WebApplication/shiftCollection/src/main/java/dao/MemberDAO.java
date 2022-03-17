@@ -130,13 +130,13 @@ public class MemberDAO {
 		}
 		return members;
 	}
-	public void addMembers(MemberSet newMembers) {
+	public void addMembers(MemberSet newMembers, int memberNum) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "INSERT INTO MEMBERS (NAME, PASS) VALUES";
+			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES";
 			for(int i = 0;i < newMembers.size() - 1;i++) {
-				sql += " ('" +newMembers.get(i).getName() + "', '" +newMembers.get(i).getPass()+ "'),";
+				sql += " (" +(memberNum + 1 + i)+ ",'" +newMembers.get(i).getName() + "', '" +newMembers.get(i).getPass()+ "'),";
 			}
-			sql += " ('" +newMembers.get(newMembers.size() - 1).getName() + "', '" +newMembers.get(newMembers.size() - 1).getPass()+ "');";
+			sql += " (" +(memberNum + 1 + newMembers.size() - 1)+ ", '" +newMembers.get(newMembers.size() - 1).getName() + "', '" +newMembers.get(newMembers.size() - 1).getPass()+ "');";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
