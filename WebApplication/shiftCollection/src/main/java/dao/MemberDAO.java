@@ -134,10 +134,16 @@ public class MemberDAO {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES";
 			for(int i = 0;i < newMembers.size() - 1;i++) {
-				sql += " (" +(memberNum + 1 + i)+ ",'" +newMembers.get(i).getName() + "', '" +newMembers.get(i).getPass()+ "'),";
+				sql += " (?, ?, ?),";
 			}
-			sql += " (" +(memberNum + 1 + newMembers.size() - 1)+ ", '" +newMembers.get(newMembers.size() - 1).getName() + "', '" +newMembers.get(newMembers.size() - 1).getPass()+ "');";
+			sql += " (?, ?, ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			for(int i = 0;i < newMembers.size();i++) {
+				pStmt.setInt(3 * i, memberNum + 1 + i);
+				Member newMember = newMembers.get(i);
+				pStmt.setString(3 * i + 1, newMember.getName());
+				pStmt.setString(3 * i + 2, newMember.getPass());
+			}
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
