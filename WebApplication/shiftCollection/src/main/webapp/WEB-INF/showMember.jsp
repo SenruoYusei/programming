@@ -13,7 +13,7 @@
 <body>
 	<div>
 		<h1>メンバー確認</h1>
-		<c:forEach begin = "0" end = "${fn:length(members) }" step = "1" varStatus = "index">
+		<c:forEach begin = "0" end = "${fn:length(members) - 1 }" step = "1" varStatus = "index">
 			<c:set var = "memberIndex" value = "${index.index }" />
 			<p>${members.get(memberIndex).getName() }</p><br>
 		</c:forEach>
