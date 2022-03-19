@@ -114,7 +114,7 @@ public class MemberDAO {
 	public MemberSet findAll() {
 		MemberSet members = new MemberSet();
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "SELECT * FROM MEMBERS WHERE ID < 99;";
+			String sql = "SELECT * FROM MEMBERS;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
 			while(rs.next()) {
