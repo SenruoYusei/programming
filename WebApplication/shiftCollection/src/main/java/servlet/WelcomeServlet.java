@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
 import model.Member;
+import model.MemberSet;
 
 /**
  * Servlet implementation class WelcomeServlet
@@ -27,17 +29,17 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//ServletContext application = this.getServletContext();
+		ServletContext application = this.getServletContext();
 //		LoginLogic llogic = new LoginLogic();
 		dao = new MemberDAO();
-		/*
+		
 		MemberSet members = (MemberSet) application.getAttribute("members");
 		if(members == null) {
 //			members = llogic.getMemberList();
 			members = dao.findAll();
 			application.setAttribute("members", members);//アプリケーションで持つスコープ
 		}
-		*/
+		
 		
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
@@ -57,7 +59,7 @@ public class WelcomeServlet extends HttpServlet {
 		String userPass = request.getParameter("pass");
 		
 		if(userName != null && userPass != null) {//ユーザー名，パスワードが入力されたとき
-			/*
+			
 			ServletContext application = this.getServletContext();
 			MemberSet members = (MemberSet) application.getAttribute("members");
 //			LoginLogic llogic = new LoginLogic();
@@ -66,9 +68,14 @@ public class WelcomeServlet extends HttpServlet {
 				dao.findAll();
 				application.setAttribute("members", members);
 			}
-			*/
+			
 //			Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
-			Member m = dao.findMember(userName, userPass);
+			Member m = null;
+			for(Member mem : members) {
+				if(!mem.getName().equals(userName) || !mem.getPass().equals(userPass))continue;
+				m = mem;
+				break;
+			}
 			
 			if(m == null) {//ユーザーまたは管理者でない場合
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
