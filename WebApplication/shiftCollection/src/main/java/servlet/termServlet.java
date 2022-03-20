@@ -55,7 +55,7 @@ public class termServlet extends HttpServlet {
 		if(isFeasible(month, term)) {
 			HttpSession session = request.getSession();
 			Member m = (Member) session.getAttribute("member");
-//			session.setAttribute("month", month);
+			session.setAttribute("month", month);
 //			session.setAttribute("term", term);
 			if(m.termChanged(month, term))m.initializeSchedule(month, term);
 			session.setAttribute("member", m);

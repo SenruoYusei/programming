@@ -33,6 +33,7 @@ public class registerOKServlet extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		dao.updateAll(m);
 		m.updateCompleted();
+		session.removeAttribute("month");
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/registerOK.jsp");
 		d.forward(request, response);
 	}
