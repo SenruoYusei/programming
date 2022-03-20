@@ -65,7 +65,7 @@ public class WelcomeServlet extends HttpServlet {
 //			LoginLogic llogic = new LoginLogic();
 			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
 //				members = llogic.getMemberList();
-				dao.findAll();
+				members = dao.findAll();
 				application.setAttribute("members", members);
 			}
 			
