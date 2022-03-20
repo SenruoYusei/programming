@@ -61,6 +61,7 @@ public class registerServlet extends HttpServlet {
 			session.setAttribute("endMinute", eM);
 			Member m = (Member) session.getAttribute("member");
 			m.setSchedule(dayPos, s);
+			session.setAttribute("member", m);
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
 		}else if(dayPos == -1) {
