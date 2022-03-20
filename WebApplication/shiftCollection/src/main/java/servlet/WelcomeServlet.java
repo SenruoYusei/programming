@@ -69,7 +69,6 @@ public class WelcomeServlet extends HttpServlet {
 				members = dao.findAll();
 				application.setAttribute("members", members);
 			}
-			application.setAttribute("members", members);
 			//Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
 			Member m = null;
 			for(Member mem : members) {
