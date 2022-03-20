@@ -41,13 +41,13 @@ public class WelcomeServlet extends HttpServlet {
 		}
 		
 		
-		HttpSession session = request.getSession();
-		Member m = (Member) session.getAttribute("member");
-		if(m != null && !m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-//			llogic.updateAll(m);
-			dao.updateAll(m);
-			m.updateCompleted();
-		}
+//		HttpSession session = request.getSession();
+//		Member m = (Member) session.getAttribute("member");
+//		if(m != null && !m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
+////			llogic.updateAll(m);
+//			dao.updateAll(m);
+//			m.updateCompleted();
+//		}
 		
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");
 		d.forward(request, response);//welcome.jsp に移動
