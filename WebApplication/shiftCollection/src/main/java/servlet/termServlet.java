@@ -33,9 +33,6 @@ public class termServlet extends HttpServlet {
 			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
 			response.sendRedirect("/shiftCollection/welcome.jsp");
 		}else if(m != null && m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-//			LoginLogic llogic = new LoginLogic();
-//			llogic.updateAll(m);
-			
 			MemberDAO dao = new MemberDAO();
 			dao.updateAll(m);
 			m.updateCompleted();
@@ -58,8 +55,8 @@ public class termServlet extends HttpServlet {
 		if(isFeasible(month, term)) {
 			HttpSession session = request.getSession();
 			Member m = (Member) session.getAttribute("member");
-			session.setAttribute("month", month);
-			session.setAttribute("term", term);
+//			session.setAttribute("month", month);
+//			session.setAttribute("term", term);
 			if(m.termChanged(month, term))m.initializeSchedule(month, term);
 			session.setAttribute("member", m);
 			//setTerm を m.getDayNum の中に

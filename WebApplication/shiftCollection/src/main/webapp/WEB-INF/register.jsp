@@ -27,7 +27,7 @@
 		endHour = "${endHour }"
 		endMinute = "${endMinute }"
 		-->
-		<c:set var = "tNum" value = "${member.termNum == 0 ? 0 : 15 }"/>
+		<c:set var = "tNum" value = "${member.term == 0 ? 0 : 15 }"/>
 		<c:if test = "${not empty registerError }">
 			<p>${registerError}</p>
 		</c:if>

@@ -16,7 +16,7 @@
 		<a href = "/shiftCollection/Logout">ログアウト</a>
 		<p>${month + 1 }月
 		<c:choose>
-			<c:when test = "${term == 0 }">前半</c:when>
+			<c:when test = "${member.term == 0 }">前半</c:when>
 			<c:otherwise>後半</c:otherwise>
 		</c:choose><br>
 		

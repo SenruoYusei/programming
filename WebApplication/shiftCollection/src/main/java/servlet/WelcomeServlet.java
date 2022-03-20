@@ -62,9 +62,7 @@ public class WelcomeServlet extends HttpServlet {
 			
 			ServletContext application = this.getServletContext();
 			MemberSet members = (MemberSet) application.getAttribute("members");
-//			LoginLogic llogic = new LoginLogic();
 			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
-//				members = llogic.getMemberList();
 				MemberDAO dao = new MemberDAO();
 				members = dao.findAll();
 				application.setAttribute("members", members);
