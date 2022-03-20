@@ -21,7 +21,7 @@ import model.MemberSet;
 @WebServlet("/WelcomeServlet")
 public class WelcomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberDAO dao;
+	//private MemberDAO dao;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,16 +29,16 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		ServletContext application = this.getServletContext();
+		//ServletContext application = this.getServletContext();
 //		LoginLogic llogic = new LoginLogic();
-		dao = new MemberDAO();
+		//dao = new MemberDAO();
 		
-		MemberSet members = (MemberSet) application.getAttribute("members");
-		if(members == null) {
-//			members = llogic.getMemberList();
-			members = dao.findAll();
-			application.setAttribute("members", members);//アプリケーションで持つスコープ
-		}
+//		MemberSet members = (MemberSet) application.getAttribute("members");
+//		if(members == null) {
+////			members = llogic.getMemberList();
+//			members = dao.findAll();
+//			application.setAttribute("members", members);//アプリケーションで持つスコープ
+//		}
 		
 		
 //		HttpSession session = request.getSession();
@@ -65,11 +65,12 @@ public class WelcomeServlet extends HttpServlet {
 //			LoginLogic llogic = new LoginLogic();
 			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
 //				members = llogic.getMemberList();
+				MemberDAO dao = new MemberDAO();
 				members = dao.findAll();
 				application.setAttribute("members", members);
 			}
-			
-//			Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
+			application.setAttribute("members", members);
+			//Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
 			Member m = null;
 			for(Member mem : members) {
 				if(!mem.getName().equals(userName) || !mem.getPass().equals(userPass))continue;
