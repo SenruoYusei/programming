@@ -16,7 +16,7 @@ public class MemberSet extends ArrayList<Member>{
 		for(int i = 1;i < 30;i++) {
 			Member member = (i < size()) ? get(i) : null;
 			
-			String[] submittedData = (member == null || member.getMonth() != m || member.getTermNum() != 15 * t) ? new String[16] : member.getAllSchedule();
+			String[] submittedData = (member == null || member.getMonth() != m || member.getTerm() != 15 * t) ? new String[16] : member.getAllSchedule();
 			for(int j = 0;j < submittedData.length;j++) {
 				schedule[j] += (member == null ? "" : member.getName()) + "," + (submittedData[j] != null ? submittedData[j] : null) + "\n";
 			}

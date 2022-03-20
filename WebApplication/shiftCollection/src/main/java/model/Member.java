@@ -48,7 +48,7 @@ public class Member {
 		}
 		return s;
 	}
-	public int getTermNum() {
+	public int getTerm() {
 		return term;
 	}
 	public int getMonth() {
@@ -60,7 +60,7 @@ public class Member {
 		pass = newPass;
 	}
 	public boolean termChanged(int m, int t) {
-		return getMonth() != m || getTermNum() != t;
+		return getMonth() != m || getTerm() != t;
 	}
 	public void initializeSchedule(int m, int t) {
 		if(!isUpdated)isUpdated = true;

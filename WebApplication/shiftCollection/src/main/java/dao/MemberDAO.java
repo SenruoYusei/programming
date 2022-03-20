@@ -267,7 +267,7 @@ public class MemberDAO {
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
 			pStmt.setInt(2, m.getMonth());
-			pStmt.setInt(3, m.getTermNum());
+			pStmt.setInt(3, m.getTerm());
 			for(int i = 0;i < dayNum;i++) {
 				pStmt.setString(4 + i,m.getSchedule(i));
 			}
