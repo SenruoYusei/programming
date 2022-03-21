@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>term 直し</p>
+		<p>term 直し2</p>
 	</div>
 </body>
 </html>

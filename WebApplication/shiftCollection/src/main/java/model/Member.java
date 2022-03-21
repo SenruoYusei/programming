@@ -60,7 +60,7 @@ public class Member {
 		pass = newPass;
 	}
 	public boolean termChanged(int m, int t) {
-		return getMonth() != m || getTerm() != t;
+		return month != m || term != t;
 	}
 	public void initializeSchedule(int m, int t) {
 		if(!isUpdated)isUpdated = true;
@@ -110,7 +110,7 @@ public class Member {
 		int year = (nowMonth > m) ? calendar.get(Calendar.YEAR) + 1 : calendar.get(Calendar.YEAR);
 		calendar.set(year,month,1);
 		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-		//term = t;
+		term = t;
 		if(t == 0) {//前半
 			//term = 0;
 			dayNum = 15;
