@@ -65,7 +65,6 @@ public class WelcomeServlet extends HttpServlet {
 			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
 				MemberDAO dao = new MemberDAO();
 				members = dao.findAll();
-				application.setAttribute("members", members);
 			}
 			//Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
 			Member m = null;
@@ -74,7 +73,7 @@ public class WelcomeServlet extends HttpServlet {
 				m = mem;
 				break;
 			}
-			
+			application.setAttribute("members", members);
 			if(m == null) {//ユーザーまたは管理者でない場合
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
 				RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");

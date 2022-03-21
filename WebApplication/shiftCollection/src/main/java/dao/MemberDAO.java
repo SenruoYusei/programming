@@ -254,15 +254,15 @@ public class MemberDAO {
 	}
 	public void updateAll(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "UPDATE MEMBERS SET PASS = ?, "
-					+ "MNUM = ?, "
-					+ "TERM = ?, ";
+			String sql = "UPDATE MEMBERS SET PASS=?, "
+					+ "MNUM=?, "
+					+ "TERM=?, ";
 			int dayNum = m.getDayNum();
 			for(int i = 0;i < dayNum - 1;i++) {
-				sql += "DAY" + i + " = ?, ";
+				sql += "DAY" + i + "=?, ";
 			}
-			sql += "DAY"+(dayNum - 1)+" = ? ";
-			sql += "WHERE ID = ?;";
+			sql += "DAY"+(dayNum - 1)+"=? ";
+			sql += "WHERE ID=?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
 			pStmt.setString(1, m.getPass());
