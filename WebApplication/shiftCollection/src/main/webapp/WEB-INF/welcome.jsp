@@ -20,7 +20,7 @@
 			パスワード : <input type = "password" name = "pass"><br>
 			<input type = "submit" value = "ログイン">
 		</form>
-		<p>month 削除</p>
+		<p>term 直し</p>
 	</div>
 </body>
 </html>
