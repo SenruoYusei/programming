@@ -13,7 +13,7 @@ import model.MemberSet;
 
 
 public class MemberDAO {
-	//private String driverName = "org.mysql.Driver";
+	private String driverName = "org.mysql.Driver";
 	private String jdbcurl = "jdbc:mysql://database-4.clgawijf5hiq.us-east-2.rds.amazonaws.com:3306/database4_forEclipse?user=admin&password=199808Yusei*";
 	/*
 	public Member findMember(User u) {//登録情報に基づき，該当するメンバーがいれば，そのメンバーを返す．
@@ -113,6 +113,26 @@ public class MemberDAO {
 	
 	public MemberSet findAll() {
 		MemberSet members = new MemberSet();
+		Connection conn = null;
+		try {
+			Class.forName(driverName);
+			conn = DriverManager.getConnection(jdbcurl);
+			String sql = "SELECT * FROM MEMBERS;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			ResultSet rs = pStmt.executeQuery();
+			while(rs.next()) {
+				String[] s = new String[16];
+				for(int i = 0;i < s.length;i++) {
+					s[i] = rs.getString("DAY" + i);
+				}
+				members.add(new Member(rs.getInt("ID"), rs.getString("NAME"), rs.getString("PASS"), rs.getInt("MNUM"), rs.getInt("TERM"), s));
+			}
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		} catch(SQLException e){
+			e.printStackTrace();
+		}return members;
+		/*
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT * FROM MEMBERS;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -129,6 +149,7 @@ public class MemberDAO {
 			return null;
 		}
 		return members;
+		*/
 	}
 	public void addMembers(MemberSet newMembers, int memberNum) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
