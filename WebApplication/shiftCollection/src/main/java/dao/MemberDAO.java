@@ -129,9 +129,12 @@ public class MemberDAO {
 			}
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
+			return null;
 		} catch(SQLException e){
 			e.printStackTrace();
-		}return members;
+			return null;
+		}
+		return members;
 		/*
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT * FROM MEMBERS;";
