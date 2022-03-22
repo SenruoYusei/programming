@@ -112,7 +112,9 @@ public class MemberDAO {
 	}
 	
 	public MemberSet findAll() {
+		
 		MemberSet members = new MemberSet();
+		/*
 		Connection conn = null;
 		try {
 			Class.forName(driverName);
@@ -135,7 +137,8 @@ public class MemberDAO {
 			return null;
 		}
 		return members;
-		/*
+		*/
+		
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "SELECT * FROM MEMBERS;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -152,7 +155,7 @@ public class MemberDAO {
 			return null;
 		}
 		return members;
-		*/
+		
 	}
 	public void addMembers(MemberSet newMembers, int memberNum) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
