@@ -29,25 +29,25 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//ServletContext application = this.getServletContext();
+		ServletContext application = this.getServletContext();
 //		LoginLogic llogic = new LoginLogic();
-		//dao = new MemberDAO();
+		MemberDAO dao = new MemberDAO();
 		
-//		MemberSet members = (MemberSet) application.getAttribute("members");
-//		if(members == null) {
-////			members = llogic.getMemberList();
-//			members = dao.findAll();
-//			application.setAttribute("members", members);//アプリケーションで持つスコープ
-//		}
+		MemberSet members = (MemberSet) application.getAttribute("members");
+		if(members == null) {
+//			members = llogic.getMemberList();
+			members = dao.findAll();
+			application.setAttribute("members", members);//アプリケーションで持つスコープ
+		}
 		
 		
-//		HttpSession session = request.getSession();
-//		Member m = (Member) session.getAttribute("member");
-//		if(m != null && !m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-////			llogic.updateAll(m);
-//			dao.updateAll(m);
-//			m.updateCompleted();
-//		}
+		HttpSession session = request.getSession();
+		Member m = (Member) session.getAttribute("member");
+		if(m != null && !m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
+//			llogic.updateAll(m);
+			dao.updateAll(m);
+			m.updateCompleted();
+		}
 		
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");
 		d.forward(request, response);//welcome.jsp に移動

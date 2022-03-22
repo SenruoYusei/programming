@@ -69,6 +69,7 @@ public class Member {
 	}
 	
 	public void setSchedule(String[] time) {
+		if(!isUpdated)isUpdated = true;
 		s = time;
 	}
 	public void setSchedule(int dayPos, String time) {
