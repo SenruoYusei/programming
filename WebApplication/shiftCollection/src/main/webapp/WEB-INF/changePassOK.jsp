@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <body>
 	<div>
 		<h1>パスワードの変更が完了しました</h1>
+		変更後のパスワード : ${member.pass}
 		<a href = "/shiftCollection/termServlet">シフト登録へ</a>
 		<a href = "/shiftCollection/WelcomeServlet">トップへ</a>
 	</div>

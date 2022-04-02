@@ -281,9 +281,9 @@ public class MemberDAO {
 	}
 	public void updateAll(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "UPDATE MEMBERS SET PASS=?, "
-					+ "MNUM=?, "
-					+ "TERM=?, ";
+			String sql = "UPDATE MEMBERS SET PASS=?,"
+					+ "MNUM=?,"
+					+ "TERM=?,";
 			int dayNum = m.getDayNum();
 			for(int i = 0;i < dayNum - 1;i++) {
 				sql += "DAY" + i + "=?, ";
