@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MemberDAO;
 import model.Member;
 
 /**
@@ -34,6 +35,9 @@ public class registerServlet extends HttpServlet {
 			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
 			response.sendRedirect("/shiftCollection/welcome.jsp");
 		}else {
+			MemberDAO dao = new MemberDAO();
+			dao.updateAll(m);
+			m.updateCompleted();
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
 		}

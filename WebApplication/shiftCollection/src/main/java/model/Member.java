@@ -112,7 +112,7 @@ public class Member {
 		calendar.set(year,month,1);
 		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		term = t;
-		if(t == 0) {//前半
+		if(term == 0) {//前半
 			//term = 0;
 			dayNum = 15;
 			return;
