@@ -167,9 +167,9 @@ public class MemberDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			for(int i = 0;i < newMembers.size();i++) {
 				Member newMember = newMembers.get(i);
-				pStmt.setInt(3 * i, newMember.getId());
-				pStmt.setString(3 * i + 1, newMember.getName());
-				pStmt.setString(3 * i + 2, newMember.getPass());
+				pStmt.setInt(3 * i + 1, newMember.getId());
+				pStmt.setString(3 * i + 2, newMember.getName());
+				pStmt.setString(3 * i + 3, newMember.getPass());
 			}
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
