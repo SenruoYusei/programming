@@ -31,7 +31,8 @@ public class registerOKServlet extends HttpServlet {
 //		llogic.updateAll(m);
 		
 		MemberDAO dao = new MemberDAO();
-		dao.updateAll(m);
+		//dao.updateAll(m);
+		dao.updateSchedules(m);
 		m.updateCompleted();
 		session.removeAttribute("month");
 		session.setAttribute("member", m);

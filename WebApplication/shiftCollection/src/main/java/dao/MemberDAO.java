@@ -347,4 +347,25 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	public void updateSchedules(Member m) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "UPDATE MEMBERS SET ";
+			for(int i = 0;i < 15;i++) {
+				sql += "DAY" + i + "=?, ";
+			}
+			sql += "DAY15=? ";
+			sql += "WHERE ID=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//DB への変更内容を入力
+			for(int i = 0;i < 16;i++) {
+				if(m.isEmpty(i))pStmt.setString(i + 1, "");
+				else pStmt.setString(i + 1, m.getSchedule(i));
+			}
+			pStmt.setInt(16, m.getId());
+			//DB を更新
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

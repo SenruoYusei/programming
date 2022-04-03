@@ -65,7 +65,8 @@ public class Member {
 	public void initializeSchedule(int m, int t) {
 		if(!isUpdated)isUpdated = true;
 		setTermInfo(m, t);
-		s = new String[dayNum];
+		//s = new String[dayNum];
+		s = new String[16];
 	}
 	
 	public void setSchedule(String[] time) {
@@ -101,6 +102,9 @@ public class Member {
 		return name.equals(u.getName()) && pass.equals(u.getPass());
 	}
 	*/
+	public boolean isEmpty(int dayPos) {
+		return s[dayPos] == null;
+	}
 	public boolean isMatched(String userName, String userPass) {
 		return name.equals(userName) && pass.equals(userPass);
 	}
