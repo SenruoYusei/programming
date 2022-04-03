@@ -12,6 +12,7 @@
 <body>
 	<div>
 		<h1>シフトの登録が完了しました．</h1>
+		${startID }
 		<a href = "/shiftCollection/WelcomeServlet">トップへ</a><br>
 		<a href = "/shiftCollection/DeleteMember">メンバーの削除</a><br>
 		
