@@ -41,7 +41,7 @@ public class AddMember extends HttpServlet {
 		String[] passwords = request.getParameterValues("pass[]");
 		ServletContext application = this.getServletContext();
 		MemberSet members = (MemberSet) application.getAttribute("members");
-		int startID = members.get(members.size() - 2).getId();
+		int startID = members.get(members.size() - 2).getId() + 1;
 		MemberSet newMembers = new MemberSet();
 		for(int i = 0;i < names.length;i++) {
 			if(names[i] == null || passwords[i] == null)continue;
