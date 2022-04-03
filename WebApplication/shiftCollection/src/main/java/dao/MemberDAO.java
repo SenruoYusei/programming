@@ -163,7 +163,7 @@ public class MemberDAO {
 			for(int i = 0;i < newMembers.size() - 1;i++) {
 				sql += " (?, ?, ?),";
 			}
-			sql += " (?, ?, ?);";
+			sql += " (?, '?', ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			for(int i = 0;i < newMembers.size();i++) {
 				Member newMember = newMembers.get(i);
