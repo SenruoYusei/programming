@@ -361,7 +361,7 @@ public class MemberDAO {
 				if(m.isEmpty(i))pStmt.setString(i + 1, "");
 				else pStmt.setString(i + 1, m.getSchedule(i));
 			}
-			pStmt.setInt(16, m.getId());
+			pStmt.setInt(17, m.getId());
 			//DB を更新
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
