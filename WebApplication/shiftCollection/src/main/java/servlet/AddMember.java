@@ -3,12 +3,12 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
 import model.Member;
@@ -38,15 +38,17 @@ public class AddMember extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String[] names = request.getParameterValues("name[]");
 		String[] passwords = request.getParameterValues("pass[]");
-		MemberSet members = new MemberSet();
+		ServletContext application = this.getServletContext();
+		MemberSet members = (MemberSet) application.getAttribute("members");
+		int startID = members.get(members.size() - 2).getId();
+		MemberSet newMembers = new MemberSet();
 		for(int i = 0;i < names.length;i++) {
 			if(names[i] == null || passwords[i] == null)continue;
-			members.add(new Member(0, names[i], passwords[i], 0, 0));
+			newMembers.add(new Member(startID + i, names[i], passwords[i], 0, 0));
 		}
-		if(!members.isEmpty()) {
+		if(!newMembers.isEmpty()) {
 			MemberDAO dao = new MemberDAO();
-			HttpSession session = request.getSession();
-			dao.addMembers(members, (int)session.getAttribute("memberNum"));
+			dao.addMembers(newMembers);
 		}
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
 		d.forward(request, response);

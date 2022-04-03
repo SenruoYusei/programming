@@ -157,7 +157,7 @@ public class MemberDAO {
 		return members;
 		
 	}
-	public void addMembers(MemberSet newMembers, int memberNum) {
+	public void addMembers(MemberSet newMembers) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES";
 			for(int i = 0;i < newMembers.size() - 1;i++) {
@@ -166,8 +166,8 @@ public class MemberDAO {
 			sql += " (?, ?, ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			for(int i = 0;i < newMembers.size();i++) {
-				pStmt.setInt(3 * i, memberNum + 1 + i);
 				Member newMember = newMembers.get(i);
+				pStmt.setInt(3 * i, newMember.getId());
 				pStmt.setString(3 * i + 1, newMember.getName());
 				pStmt.setString(3 * i + 2, newMember.getPass());
 			}
