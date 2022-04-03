@@ -23,7 +23,7 @@
 			<c:forEach begin="0" end="${member.dayNum - 1}" step="1" varStatus="status">
 				<c:set var = "index" value = "${ status.index}"/>
 				<c:set var = "info" value = "${member.getSchedule(index) }"/>
-				<p>${member.getDay(index)} : ${info }</p>
+				${member.getDay(index)} : ${info }
 				<form action = "/shiftCollection/RegisterConfirmServlet" method = "post">
 				<c:if test = "${member.getSchedule(index) != '' and !empty member.getSchedule(index)}">
 					<input type = "hidden" name = "pos" value = "${index }">

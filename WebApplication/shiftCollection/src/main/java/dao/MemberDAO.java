@@ -281,24 +281,22 @@ public class MemberDAO {
 	}
 	public void updateAll(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "UPDATE MEMBERS SET PASS=?,"
-					+ "MNUM=?,"
+			String sql = "UPDATE MEMBERS SET MNUM=?,"
 					+ "TERM=?,";
-			int dayNum = m.getDayNum();
-			for(int i = 0;i < dayNum - 1;i++) {
+			for(int i = 0;i < 15;i++) {
 				sql += "DAY" + i + "=?, ";
 			}
-			sql += "DAY"+(dayNum - 1)+"=? ";
+			sql += "DAY15=? ";
 			sql += "WHERE ID=?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//DB への変更内容を入力
-			pStmt.setString(1, m.getPass());
-			pStmt.setInt(2, m.getMonth());
-			pStmt.setInt(3, m.getTerm());
-			for(int i = 0;i < dayNum;i++) {
-				pStmt.setString(4 + i,m.getSchedule(i));
+			pStmt.setInt(1, m.getMonth());
+			pStmt.setInt(2, m.getTerm());
+			for(int i = 0;i < 16;i++) {
+				if(m.isEmpty(i))pStmt.setString(i + 3, "");
+				else pStmt.setString(i + 3, m.getSchedule(i));
 			}
-			pStmt.setInt(4 + dayNum, m.getId());
+			pStmt.setInt(19, m.getId());
 			//DB を更新
 			pStmt.executeUpdate();
 		}catch(SQLException e) {

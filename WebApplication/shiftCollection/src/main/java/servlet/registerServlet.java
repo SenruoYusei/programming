@@ -30,7 +30,7 @@ public class registerServlet extends HttpServlet {
 		session.setAttribute("beginHour", "8");
 		session.setAttribute("beginMinute", "30");
 		session.setAttribute("endHour", "22");
-		session.setAttribute("endMinute", "15");
+		session.setAttribute("endMinute", "30");
 		if(m == null) {
 			request.setAttribute("loginError", "正式なログインができておりません\nログインしなおしてください");
 			response.sendRedirect("/shiftCollection/welcome.jsp");

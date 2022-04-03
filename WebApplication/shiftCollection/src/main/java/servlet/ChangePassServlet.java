@@ -56,7 +56,6 @@ public class ChangePassServlet extends HttpServlet {
 			session.setAttribute("member", m);
 			
 			MemberDAO dao = new MemberDAO();
-			//dao.updateAll(m);
 			dao.updatePass(m);
 			m.updateCompleted();
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/changePassOK.jsp");
