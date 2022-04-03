@@ -305,4 +305,46 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	public void updatePass(Member m) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "UPDATE MEMBERS SET PASS=? ";
+			sql += "WHERE ID=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//DB への変更内容を入力
+			pStmt.setString(1, m.getPass());
+			pStmt.setInt(2, m.getId());
+			//DB を更新
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void updateMNUM(Member m) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "UPDATE MEMBERS SET MNUM=? ";
+			sql += "WHERE ID=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//DB への変更内容を入力
+			pStmt.setInt(1, m.getMonth());
+			pStmt.setInt(2, m.getId());
+			//DB を更新
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void updateTerm(Member m) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "UPDATE MEMBERS SET TERM=? ";
+			sql += "WHERE ID=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//DB への変更内容を入力
+			pStmt.setInt(1, m.getTerm());
+			pStmt.setInt(2, m.getId());
+			//DB を更新
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

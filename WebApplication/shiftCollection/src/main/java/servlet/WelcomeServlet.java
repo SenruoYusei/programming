@@ -30,24 +30,22 @@ public class WelcomeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		ServletContext application = this.getServletContext();
-//		LoginLogic llogic = new LoginLogic();
 		MemberDAO dao = new MemberDAO();
 		
 		MemberSet members = (MemberSet) application.getAttribute("members");
 		if(members == null) {
-//			members = llogic.getMemberList();
 			members = dao.findAll();
 			application.setAttribute("members", members);//アプリケーションで持つスコープ
 		}
 		
-		
+		/*
 		HttpSession session = request.getSession();
 		Member m = (Member) session.getAttribute("member");
 		if(m != null && !m.isUpdated()) {//途中で終了してしまった場合，再ログイン時に変更内容を更新したい
-//			llogic.updateAll(m);
 			dao.updateAll(m);
 			m.updateCompleted();
 		}
+		*/
 		
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");
 		d.forward(request, response);//welcome.jsp に移動
@@ -62,18 +60,12 @@ public class WelcomeServlet extends HttpServlet {
 			
 			ServletContext application = this.getServletContext();
 			MemberSet members = (MemberSet) application.getAttribute("members");
-			if(members == null) {//アプリケーションスコープがnull のとき新しく作成
-				MemberDAO dao = new MemberDAO();
-				members = dao.findAll();
-			}
-			//Member m = llogic.getLoginAccount(userName, userPass);//ユーザーまたは管理者かどうかを判定
 			Member m = null;
 			for(Member mem : members) {
 				if(!mem.getName().equals(userName) || !mem.getPass().equals(userPass))continue;
 				m = mem;
 				break;
 			}
-			application.setAttribute("members", members);
 			if(m == null) {//ユーザーまたは管理者でない場合
 				request.setAttribute("loginError", "ユーザー名とパスワードが正しくありません");
 				RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");
@@ -88,6 +80,10 @@ public class WelcomeServlet extends HttpServlet {
 				RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/loginOK.jsp");
 				d.forward(request, response);
 			}
+		}else {
+			request.setAttribute("loginError", "ユーザー名とパスワードを入力してください");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/welcome.jsp");
+			d.forward(request, response);
 		}
 	}
 }

@@ -36,7 +36,8 @@ public class registerServlet extends HttpServlet {
 			response.sendRedirect("/shiftCollection/welcome.jsp");
 		}else {
 			MemberDAO dao = new MemberDAO();
-			dao.updateAll(m);
+			dao.updateMNUM(m);
+			dao.updateTerm(m);
 			m.updateCompleted();
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/register.jsp");
 			d.forward(request, response);
