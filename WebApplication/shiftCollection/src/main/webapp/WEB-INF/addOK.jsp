@@ -12,9 +12,14 @@
 <body>
 	<div>
 		<h1>シフトの登録が完了しました．</h1>
+		<c:if test = "${not empty executeMsg }">
+			<p>${executeMsg}</p>
+		</c:if>
 		${startID }
-		<a href = "/shiftCollection/WelcomeServlet">トップへ</a><br>
+		<a href = "/shiftCollection/AddMember">続けて追加</a>
+		<a href = "/shiftCollection/ShowMember">メンバーの表示</a>
 		<a href = "/shiftCollection/DeleteMember">メンバーの削除</a><br>
+		<a href = "/shiftCollection/WelcomeServlet">トップへ</a><br>
 		
 	</div>
 </body>

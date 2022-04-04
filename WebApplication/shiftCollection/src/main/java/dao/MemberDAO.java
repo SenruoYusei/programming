@@ -157,20 +157,23 @@ public class MemberDAO {
 		return members;
 		
 	}
-	public void addMembers(MemberSet newMembers) {
+	public void addMembers(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES";
-			for(int i = 0;i < newMembers.size() - 1;i++) {
-				sql += " (?, ?, ?),";
-			}
-			sql += " (?, '?', ?);";
+			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES (?, ?, ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			for(int i = 0;i < newMembers.size();i++) {
-				Member newMember = newMembers.get(i);
-				pStmt.setInt(3 * i + 1, newMember.getId());
-				pStmt.setString(3 * i + 2, newMember.getName());
-				pStmt.setString(3 * i + 3, newMember.getPass());
-			}
+			pStmt.setInt(1, m.getId());
+			pStmt.setString(2, m.getName());
+			pStmt.setString(3, m.getPass());
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteMember(int id) {
+		try(Connection conn = DriverManager.getConnection(jdbcurl)){
+			String sql = "DELETE FROM MEMBERS WHERE ID = ?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, id);
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

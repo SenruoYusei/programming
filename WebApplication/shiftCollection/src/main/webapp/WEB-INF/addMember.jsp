@@ -13,12 +13,17 @@
 <body>
 	<div>
 		<h1>メンバー追加</h1>
+		<c:if test = "${not empty errorMsg }">
+			<p>${errorMsg }</p>
+		</c:if>
 		<form action = "/shiftCollection/AddMember" method = "post">
+		<%--
 			<c:forEach begin = "0" end = "10" step = "1" varStatus = "status">
 				<c:set var = "index" value = "${status .index }"/>
-					名前 : <input type = "text" name = name[] >
-					パスワード : <input type = "text" name = pass[] value = "1111"><br>
-			</c:forEach>
+				--%>
+		名前 : <input type = "text" name = name >
+		パスワード : <input type = "text" name = pass value = "1111"><br>
+			<%--</c:forEach>--%>
 			<input type = "submit" value = "決定">
 		</form>
 	</div>

@@ -37,24 +37,37 @@ public class AddMember extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		/*
 		String[] names = request.getParameterValues("name[]");
 		String[] passwords = request.getParameterValues("pass[]");
+		*/
+		String name = request.getParameter("name");
+		String password = request.getParameter("pass");
 		ServletContext application = this.getServletContext();
 		MemberSet members = (MemberSet) application.getAttribute("members");
 		int startID = members.get(members.size() - 2).getId() + 1;
+		/*
 		MemberSet newMembers = new MemberSet();
 		for(int i = 0;i < names.length;i++) {
 			if(names[i] == null || passwords[i] == null)continue;
 			newMembers.add(new Member(startID + i, names[i], passwords[i], 0, 0));
 		}
-		if(!newMembers.isEmpty()) {
+		*/
+		Member m = null;
+		if(name != null && password != null)m = new Member(startID, name, password, 0, 0);
+		HttpSession session = request.getSession();
+		if(m != null) {
 			MemberDAO dao = new MemberDAO();
-			dao.addMembers(newMembers);
-			HttpSession session = request.getSession();
+			dao.addMembers(m);
 			session.setAttribute("startID", startID);
+			session.setAttribute("executeMsg", name + "さんを追加しました");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
+			d.forward(request, response);
+		}else {
+			session.setAttribute("errorMsg", "登録内容が不足しています．");
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addMember.jsp");
+			d.forward(request, response);
 		}
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
-		d.forward(request, response);
 	}
 
 }
