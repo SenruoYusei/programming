@@ -12,12 +12,12 @@
 <body>
 	<div>
 		<h1>メンバーの削除</h1>
-		<c:forEach begin = "0" end = "${ fn:length(members) - 1}"step = "1" varStatus = "index">
-			<c:set var = "memberIndex" value = "${index.index }"/>
-			${members.get(memberIndex).getName() }
+		<c:forEach begin = "0" end = "${ fn:length(members) - 1}" step = "1" varStatus = "status">
+			<c:set var = "index" value = "${status.index }"/>
+			${members.get(index).getName() }
 			<form action = "/shiftCollection/DeleteMember" method = "post">
 				<input type = "hidden" name = "pos" value = "${index }">
-				<input type = "hidden" name = "deleteName" value = "${members.get(memberIndex).getName() }">
+				<input type = "hidden" name = "deleteName" value = "${members.get(index).getName() }">
 				<button name = "action" value = "delete">削除</button>
 			</form>
 		</c:forEach>
