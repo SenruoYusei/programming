@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MemberDAO;
+
 /**
- * Servlet implementation class DeleteMember
+ * Servlet implementation class DeleteMemberExecute
  */
-@WebServlet("/DeleteMember")
-public class DeleteMember extends HttpServlet {
+@WebServlet("/DeleteMemberExecute")
+public class DeleteMemberExecute extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,6 +24,12 @@ public class DeleteMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		int deleteID = (int)session.getAttribute("deleteID");
+		String deleteName = (String)session.getAttribute("deleteName");
+		MemberDAO dao = new MemberDAO();
+		dao.deleteMember(deleteID);
+		session.setAttribute("executeMsg", deleteName + " さんを削除しました");
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMember.jsp");
 		d.forward(request, response);
 	}
@@ -29,15 +37,10 @@ public class DeleteMember extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int deleteID = Integer.parseInt(request.getParameter("pos"));
-		String deleteName = request.getParameter("deleteName");
-		HttpSession session = request.getSession();
-		session.setAttribute("deleteName", deleteName);
-		session.setAttribute("deletePos", deleteID);
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberConfirm.jsp");
-		d.forward(request, response);
+		doGet(request, response);
 	}
-
+	*/
 }

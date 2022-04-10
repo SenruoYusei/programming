@@ -12,18 +12,12 @@
 <body>
 	<div>
 		<h1>メンバーの削除</h1>
-		<c:if test = "${not empty executeMsg }">
-			<p>${executeMsg}</p>
-		</c:if>
-		<c:forEach begin = "0" end = "${ fn:length(members) - 1}" step = "1" varStatus = "status">
-			<c:set var = "index" value = "${status.index }"/>
-			${members.get(index).getName() }
-			<form action = "/shiftCollection/DeleteMember" method = "post">
-				<input type = "hidden" name = "pos" value = "${ members.get(index).getId() }">
-				<input type = "hidden" name = "deleteName" value = "${members.get(index).getName() }">
-				<button name = "action" value = "delete">削除</button>
-			</form>
-		</c:forEach>
+		<p>${deleteName } さんを削除してもよろしいですか？</p>
+		${deleteID }
+		<form action = "/shiftCollection/DeleteMemberExecute" method = "post">
+			<button name = "flag" value = "1">はい</button>
+			<button name = "flag" value = "0">いいえ</button>
+		</form>
 		<a href = "/shiftCollection/ShowMember">メンバー表示</a>
 		<a href = "/shiftCollection/Logout">ログアウト</a>
 	</div>
