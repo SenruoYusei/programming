@@ -17,10 +17,10 @@
 		</c:if>
 		<c:forEach begin = "0" end = "${ fn:length(members) - 1}" step = "1" varStatus = "status">
 			<c:set var = "index" value = "${status.index }"/>
-			${members.get(index).getName() }
 			<form action = "/shiftCollection/DeleteMember" method = "post">
 				<input type = "hidden" name = "pos" value = "${ members.get(index).getId() }">
 				<input type = "hidden" name = "deleteName" value = "${members.get(index).getName() }">
+				${members.get(index).getName() }
 				<button name = "action" value = "delete">削除</button>
 			</form>
 		</c:forEach>

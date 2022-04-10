@@ -30,7 +30,7 @@ public class DeleteMemberExecute extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		dao.deleteMember(deleteID);
 		session.setAttribute("executeMsg", deleteName + " さんを削除しました");
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMember.jsp");
+		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberComplete.jsp");
 		d.forward(request, response);
 	}
 

@@ -35,7 +35,7 @@ public class DeleteMember extends HttpServlet {
 		String deleteName = request.getParameter("deleteName");
 		HttpSession session = request.getSession();
 		session.setAttribute("deleteName", deleteName);
-		session.setAttribute("deletePos", deleteID);
+		session.setAttribute("deleteID", deleteID);
 		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberConfirm.jsp");
 		d.forward(request, response);
 	}
