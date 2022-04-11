@@ -15,7 +15,11 @@
 		<c:if test = "${not empty executeMsg }">
 			<p>${executeMsg}</p>
 		</c:if>
-		${startID }
+		<c:if test = "${not empty startID }">
+			<p>${startID}</p>
+		</c:if>
+		<p>名前 : ${newMember.name }</p>
+		<p>初期パスワード : ${newMember.pass }</p>
 		<a href = "/shiftCollection/AddMember">続けて追加</a>
 		<a href = "/shiftCollection/ShowMember">メンバーの表示</a>
 		<a href = "/shiftCollection/DeleteMember">メンバーの削除</a><br>

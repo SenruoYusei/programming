@@ -59,6 +59,7 @@ public class AddMember extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 			dao.addMember(m);
 			session.setAttribute("startID", startID);
+			session.setAttribute("newMember", m);
 			session.setAttribute("executeMsg", name + "さんを追加しました");
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
 			d.forward(request, response);
