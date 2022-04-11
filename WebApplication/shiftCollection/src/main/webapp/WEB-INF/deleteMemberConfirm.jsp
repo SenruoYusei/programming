@@ -12,9 +12,11 @@
 <body>
 	<div>
 		<h1>メンバーの削除</h1>
-		<p>${deleteName } さんを削除してもよろしいですか？</p>
+		<p>${members.get(deletePos)} さんを削除してもよろしいですか？</p>
+		<c:set var = "deleteID" value = "${members.get(deletePos).getId() }"/>
 		${deleteID }
-		<form action = "/shiftCollection/DeleteMemberExecute" method = "post">
+		<form action = "/shiftCollection/DeleteMember" method = "post">
+			<input type = "hidden" name = "id" value = "${deleteID }">
 			<button name = "flag" value = "1">はい</button>
 			<button name = "flag" value = "0">いいえ</button>
 		</form>

@@ -39,7 +39,17 @@ public class ShowMember extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		String action = request.getParameter("action");
+		int deletePos = Integer.parseInt(request.getParameter("deleteIndex"));
+		if(action.equals("deleteMember")){
+			session.setAttribute("deletePos", deletePos);
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberConfirm.jsp");
+			d.forward(request, response);
+		} else {
+			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/showMember.jsp");
+			d.forward(request, response);
+		}
 	}
 
 }

@@ -8,7 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import dao.MemberDAO;
 
 /**
  * Servlet implementation class DeleteMember
@@ -22,7 +23,7 @@ public class DeleteMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMember.jsp");
+		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberConfirm.jsp");
 		d.forward(request, response);
 	}
 
@@ -31,12 +32,13 @@ public class DeleteMember extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int deleteID = Integer.parseInt(request.getParameter("pos"));
-		String deleteName = request.getParameter("deleteName");
-		HttpSession session = request.getSession();
-		session.setAttribute("deleteName", deleteName);
-		session.setAttribute("deleteID", deleteID);
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberConfirm.jsp");
+		int deleteID = Integer.parseInt(request.getParameter("id"));
+		String flag = request.getParameter("flag");
+		if(flag.equals("1")) {
+			MemberDAO dao = new MemberDAO();
+			dao.deleteMember(deleteID);
+		}
+		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/deleteMemberComplete.jsp");
 		d.forward(request, response);
 	}
 

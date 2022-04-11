@@ -18,8 +18,13 @@
 		</c:if>
 		<c:forEach begin = "0" end = "${fn:length(members) - 1 }" step = "1" varStatus = "index">
 			<c:set var = "memberIndex" value = "${index.index }" />
-			<p>${members.get(memberIndex).getName() }</p><br>
+			${members.get(memberIndex).getName() }
+			<form action = "/shiftCollection/ShowMember" method = "post">
+				<input type = "hidden" name = "deleteIndex" value = "${memberIndex }">
+				<button name = "action" value = "deleteMember">削除</button>
+			</form>
 		</c:forEach>
+		
 		<a href = "/shiftCollection/AddMember">メンバーの追加</a>
 		<a href = "/shiftCollection/DeleteMember">メンバーの削除</a>
 	</div>
