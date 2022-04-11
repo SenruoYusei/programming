@@ -53,21 +53,19 @@ public class AddMember extends HttpServlet {
 			newMembers.add(new Member(startID + i, names[i], passwords[i], 0, 0));
 		}
 		*/
-		Member m = null;
-		if(name != null && password != null)m = new Member(startID, name, password, 0, 0);
 		HttpSession session = request.getSession();
-		if(m != null) {
+		if(name != null && password != null){
+			Member m = new Member(startID, name, password, 0, 0);
 			MemberDAO dao = new MemberDAO();
-			dao.addMembers(m);
+			dao.addMember(m);
 			session.setAttribute("startID", startID);
 			session.setAttribute("executeMsg", name + "さんを追加しました");
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addOK.jsp");
 			d.forward(request, response);
-		}else {
+		} else {
 			session.setAttribute("errorMsg", "登録内容が不足しています．");
 			RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/addMember.jsp");
-			d.forward(request, response);
-		}
+			d.forward(request, response);}
 	}
 
 }

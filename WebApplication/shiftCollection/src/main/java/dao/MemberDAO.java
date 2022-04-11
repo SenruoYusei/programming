@@ -157,7 +157,7 @@ public class MemberDAO {
 		return members;
 		
 	}
-	public void addMembers(Member m) {
+	public void addMember(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
 			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES (?, ?, ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);

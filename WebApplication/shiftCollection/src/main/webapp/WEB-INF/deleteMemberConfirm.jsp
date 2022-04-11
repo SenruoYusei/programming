@@ -12,8 +12,8 @@
 <body>
 	<div>
 		<h1>メンバーの削除</h1>
-		<p>${members.get(deletePos)} さんを削除してもよろしいですか？</p>
-		<c:set var = "deleteID" value = "${members.get(deletePos).getId() }"/>
+		<p>${members.get(deletePos).name} さんを削除してもよろしいですか？</p>
+		<c:set var = "deleteID" value = "${members.get(deletePos).id }"/>
 		${deleteID }
 		<form action = "/shiftCollection/DeleteMember" method = "post">
 			<input type = "hidden" name = "id" value = "${deleteID }">

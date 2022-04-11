@@ -18,9 +18,9 @@
 		</c:if>
 		<c:forEach begin = "0" end = "${fn:length(members) - 1 }" step = "1" varStatus = "index">
 			<c:set var = "memberIndex" value = "${index.index }" />
-			${members.get(memberIndex).getName() }
 			<form action = "/shiftCollection/ShowMember" method = "post">
 				<input type = "hidden" name = "deleteIndex" value = "${memberIndex }">
+				${members.get(memberIndex).getName() }
 				<button name = "action" value = "deleteMember">削除</button>
 			</form>
 		</c:forEach>
