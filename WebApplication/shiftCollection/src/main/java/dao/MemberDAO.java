@@ -159,7 +159,7 @@ public class MemberDAO {
 	}
 	public void addMember(Member m) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
-			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES (?, ?, ?);";
+			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES (?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, m.getId());
 			pStmt.setString(2,"'" +  m.getName() + "'");
@@ -169,7 +169,8 @@ public class MemberDAO {
 			e.printStackTrace();
 			System.out.println("SQLException が発生");
 			System.out.print(e);
-			System.out.println("エラーコード : " + e.getErrorCode());		}
+			System.out.println("エラーコード : " + e.getErrorCode());
+		}
 	}
 	public void deleteMember(int id) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
