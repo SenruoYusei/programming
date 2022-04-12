@@ -167,7 +167,9 @@ public class MemberDAO {
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}
+			System.out.println("SQLException が発生");
+			System.out.print(e);
+			System.out.println("エラーコード : " + e.getErrorCode());		}
 	}
 	public void deleteMember(int id) {
 		try(Connection conn = DriverManager.getConnection(jdbcurl)){
