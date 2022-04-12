@@ -162,7 +162,7 @@ public class MemberDAO {
 			String sql = "INSERT INTO MEMBERS (ID, NAME, PASS) VALUES (?, ?, ?);";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, m.getId());
-			pStmt.setString(2, m.getName());
+			pStmt.setString(2,"'" +  m.getName() + "'");
 			pStmt.setString(3, m.getPass());
 			pStmt.executeUpdate();
 		}catch(SQLException e) {
